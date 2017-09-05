@@ -44,12 +44,13 @@ setup(
     setup_requires=[
         "pytest-runner",
         "pytest-pylint",
-        "pytest-pycodestyle"
+        "pytest-flake8",
+        "pytest-coverage",
     ],
     tests_require=[
         "pytest",
         "pylint",
-        "pycodestyle"
+        "flake8"
     ],
 
     cmdclass={
