@@ -55,3 +55,23 @@ def test_normalize_buffer_remove(buffer, n, out):
     """Run tests for the NormalizeBuffer.remove method."""
     buffer.remove(n)
     assert buffer.to_array() == approx(np.array(out))
+
+
+@pytest.mark.parametrize("buffer, start, end, out", generate_test_cases([
+    ([], 0, 0, []),
+    ([1], 0, 0, []),
+    ([1], 0, 1, [1]),
+    ([1, 0.75, 0.5], 0, 0, []),
+    ([1, 0.75, 0.5], 0, 1, [1]),
+    ([1, 0.75, 0.5], 0, 2, [1, 0.75]),
+    ([1, 0.75, 0.5], 0, 3, [1, 0.75, 0.5]),
+    ([1, 0.75, 0.5], 1, 1, []),
+    ([1, 0.75, 0.5], 1, 2, [0.75]),
+    ([1, 0.75, 0.5], 1, 3, [0.75, 0.5]),
+    ([1, 0.75, 0.5], 2, 2, []),
+    ([1, 0.75, 0.5], 2, 3, [0.5]),
+    ([1, 0.75, 0.5], 3, 3, []),
+]))
+def test_normalize_buffer_to_array(buffer, start, end, out):
+    """Run tests for the NormalizeBuffer.to_array method."""
+    assert buffer.to_array(start, end) == approx(np.array(out))

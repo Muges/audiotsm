@@ -292,10 +292,24 @@ class NormalizeBuffer(object):
         self._offset += n
         self._offset %= self._length
 
-    def to_array(self):
-        """Returns an array containing the same data as the NormalizeBuffer.
+    def to_array(self, start=0, end=None):
+        """Returns an array containing the same data as the
+        NormalizeBuffer[start:end].
 
         :returns: :class:`numpy.ndarray`
         """
-        return np.concatenate((self._data[self._offset:],
-                               self._data[:self._offset]))
+        if end is None:
+            end = self._length
+
+        start += self._offset
+        end += self._offset
+
+        if end <= self._length:
+            return np.copy(self._data[start:end])
+
+        end -= self._length
+        if start < self._length:
+            return np.concatenate((self._data[start:], self._data[:end]))
+
+        start -= self._length
+        return np.copy(self._data[start:end])
