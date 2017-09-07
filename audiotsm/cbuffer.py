@@ -87,8 +87,9 @@ class CBuffer(object):
             self._data[:, start:] /= array[:self._max_length - start]
             self._data[:, :end] /= array[self._max_length - start:n]
 
+    @property
     def length(self):
-        """Returns the length of the CBuffer."""
+        """The length of the CBuffer."""
         return self._length
 
     def peek(self, buffer):
@@ -140,8 +141,9 @@ class CBuffer(object):
         self.remove(n)
         return n
 
+    @property
     def remaining_length(self):
-        """Returns the number of samples that can be added to the CBuffer."""
+        """The number of samples that can be added to the CBuffer."""
         return self._max_length - self._length
 
     def remove(self, n):
@@ -243,6 +245,11 @@ class NormalizeBuffer(object):
     def __repr__(self):
         return "NormalizeBuffer(offset={}, length={}, data=\n{})".format(
             self._offset, self._length, repr(self.to_array()))
+
+    @property
+    def length(self):
+        """The length of the CBuffer."""
+        return self._length
 
     def add(self, window):
         """Adds a window element-wise to the NormalizeBuffer.
