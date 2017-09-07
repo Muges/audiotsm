@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 """
-Tests for the audiotsm.utils.cbuffer package.
+Tests for the audiotsm.utils.normalizebuffer package.
 """
 
 import pytest
