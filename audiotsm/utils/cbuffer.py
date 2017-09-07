@@ -110,7 +110,7 @@ class CBuffer(object):
 
         n = min(buffer.shape[1], self._length)
 
-        # Compute the slice of data where the values will be added
+        # Compute the slice of data the values will be read from
         start = self._offset
         end = self._offset + n
 
@@ -139,6 +139,33 @@ class CBuffer(object):
         """
         n = self.peek(buffer)
         self.remove(n)
+        return n
+
+    def read_from(self, reader):
+        """Reads as many samples as possible from ``reader``, writes them to
+        the CBuffer, and returns the number of samples that were read.
+
+        :param reader: a :class:`audiotsm.io.Reader`
+        :returns: the number of samples that were read from ``reader``.
+        :raises ValueError: if the CBuffer and ``reader`` do not have the same
+            number of channels
+        """
+        # Compute the slice of data that will be written to
+        start = (self._offset + self._length) % self._max_length
+        end = start + self._max_length - self._length
+
+        if end <= self._max_length:
+            n = reader.read(self._data[:, start:end])
+        else:
+            # There is not enough space to copy the whole buffer, it has to be
+            # split into two parts, one of which will be copied at the end of
+            # _data, and the other at the beginning.
+            end -= self._max_length
+
+            n = reader.read(self._data[:, start:])
+            n += reader.read(self._data[:, :end])
+
+        self._length += n
         return n
 
     @property
@@ -227,4 +254,27 @@ class CBuffer(object):
                       buffer[:, self._max_length - start:n])
 
         self._length += n
+        return n
+
+    def write_to(self, writer):
+        """Writes as many samples as possible to ``writer``, deletes them from
+        the CBuffer, and returns the number of samples that were written.
+
+        :param writer: a :class:`audiotsm.io.Writer`
+        :returns: the number of samples that were written to ``write``
+        :raises ValueError: if the CBuffer and ``writer`` do not have the same
+            number of channels
+        """
+        # Compute the slice of data the values will be read from
+        start = self._offset
+        end = self._offset + self._length
+
+        if end <= self._max_length:
+            n = writer.write(self._data[:, start:end])
+        else:
+            end -= self._max_length
+            n = writer.write(self._data[:, start:])
+            n += writer.write(self._data[:, :end])
+
+        self.remove(n)
         return n

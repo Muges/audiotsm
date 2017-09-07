@@ -8,6 +8,7 @@ import pytest
 import numpy as np
 from numpy.testing import assert_almost_equal
 
+from audiotsm import io
 from audiotsm.utils import CBuffer
 
 
@@ -116,9 +117,62 @@ def test_cbuffer_read(in_buffer, out_buffer, out_n, remaining_data):
         ([[1, 2, 3], [4, 5, 6]], 5, [[7, 8], [9, 0]], 2,
          [[1, 2, 3, 7, 8], [4, 5, 6, 9, 0]]),
     ]))
+def test_cbuffer_read_from(in_buffer, write_buffer, out_n, out_data):
+    """Run tests for the CBuffer.write method."""
+    reader = io.array.Reader(np.array(write_buffer))
+    n = in_buffer.read_from(reader)
+
+    assert n == out_n
+    assert_almost_equal(in_buffer.to_array(), out_data)
+
+
+@pytest.mark.parametrize(
+    "in_buffer, write_buffer, out_n, out_data",
+    generate_test_cases([
+        ([[]], 0, [[]], 0, [[]]),
+        ([[], []], 0, [[], []], 0, [[], []]),
+        ([[], []], 0, [[1, 2], [3, 4]], 0, [[], []]),
+        ([[], []], 1, [[1, 2], [3, 4]], 1, [[1], [3]]),
+        ([[], []], 2, [[1, 2], [3, 4]], 2, [[1, 2], [3, 4]]),
+        ([[1, 2, 3], [4, 5, 6]], 3, [[7, 8], [9, 0]], 0,
+         [[1, 2, 3], [4, 5, 6]]),
+        ([[1, 2, 3], [4, 5, 6]], 4, [[7, 8], [9, 0]], 1,
+         [[1, 2, 3, 7], [4, 5, 6, 9]]),
+        ([[1, 2, 3], [4, 5, 6]], 5, [[7, 8], [9, 0]], 2,
+         [[1, 2, 3, 7, 8], [4, 5, 6, 9, 0]]),
+    ]))
 def test_cbuffer_write(in_buffer, write_buffer, out_n, out_data):
     """Run tests for the CBuffer.write method."""
     n = in_buffer.write(np.array(write_buffer))
 
     assert n == out_n
     assert_almost_equal(in_buffer.to_array(), out_data)
+
+
+@pytest.mark.parametrize(
+    "in_buffer, out_buffer, out_n, remaining_data",
+    generate_test_cases([
+        ([[]], 0, [[]], 0, [[]]),
+        ([[]], 2, [[]], 0, [[]]),
+        ([[]], 0, [[0, 0]], 0, [[]]),
+        ([[]], 2, [[0, 0]], 0, [[]]),
+        ([[1, 2, 3], [4, 5, 6]], 3, [[], []], 0, [[1, 2, 3], [4, 5, 6]]),
+        ([[1, 2, 3], [4, 5, 6]], 3, [[1], [4]], 1, [[2, 3], [5, 6]]),
+        ([[1, 2, 3], [4, 5, 6]], 3, [[1, 2], [4, 5]], 2, [[3], [6]]),
+        ([[1, 2, 3], [4, 5, 6]], 3, [[1, 2, 3], [4, 5, 6]], 3, [[], []]),
+        ([[1, 2, 3], [4, 5, 6]], 3, [[1, 2, 3, 0], [4, 5, 6, 0]], 3, [[], []]),
+        ([[1, 2, 3], [4, 5, 6]], 5, [[], []], 0, [[1, 2, 3], [4, 5, 6]]),
+        ([[1, 2, 3], [4, 5, 6]], 5, [[1], [4]], 1, [[2, 3], [5, 6]]),
+        ([[1, 2, 3], [4, 5, 6]], 5, [[1, 2], [4, 5]], 2, [[3], [6]]),
+        ([[1, 2, 3], [4, 5, 6]], 5, [[1, 2, 3], [4, 5, 6]], 3, [[], []]),
+        ([[1, 2, 3], [4, 5, 6]], 5, [[1, 2, 3, 0], [4, 5, 6, 0]], 3, [[], []]),
+    ]))
+def test_cbuffer_write_to(in_buffer, out_buffer, out_n, remaining_data):
+    """Run tests for the CBuffer.read method."""
+    read_buffer = np.zeros_like(out_buffer, dtype=np.float32)
+    writer = io.array.Writer(read_buffer)
+    n = in_buffer.write_to(writer)
+
+    assert n == out_n
+    assert_almost_equal(read_buffer, out_buffer)
+    assert_almost_equal(in_buffer.to_array(), remaining_data)
