@@ -13,7 +13,7 @@ import numpy as np
 from . import base
 
 
-class Reader(base.Reader):
+class ArrayReader(base.Reader):
     """A Reader allowing to use :class:`numpy.ndarray` as input of a TSM
     object.
 
@@ -43,7 +43,7 @@ class Reader(base.Reader):
         return n
 
 
-class Writer(base.Writer):
+class ArrayWriter(base.Writer):
     """A Writer allowing to use :class:`numpy.ndarray` as output of a TSM
     object.
 

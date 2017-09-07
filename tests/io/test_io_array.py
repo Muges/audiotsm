@@ -8,7 +8,7 @@ import pytest
 import numpy as np
 from numpy.testing import assert_almost_equal
 
-from audiotsm.io.array import Reader, Writer
+from audiotsm.io.array import ArrayReader, ArrayWriter
 
 
 @pytest.mark.parametrize("data_in, read_out, n_out, data_out", [
@@ -20,8 +20,8 @@ from audiotsm.io.array import Reader, Writer
     ([[1, 2, 3], [4, 5, 6]], [[1, 2, 3, 0], [4, 5, 6, 0]], 3, [[], []]),
 ])
 def test_read(data_in, read_out, n_out, data_out):
-    """Run tests for the Reader.read method."""
-    reader = Reader(np.array(data_in))
+    """Run tests for the ArrayReader.read method."""
+    reader = ArrayReader(np.array(data_in))
 
     buffer = np.zeros_like(read_out)
     n = reader.read(buffer)
@@ -54,9 +54,9 @@ def test_read(data_in, read_out, n_out, data_out):
     ([[1, 2], [4, 5]], [[], []], 2, 0, [[1, 2, 0], [4, 5, 0]]),
 ])
 def test_write(write1, write2, n1_out, n2_out, buffer_out):
-    """Run tests for the Writer.write method."""
+    """Run tests for the ArrayWriter.write method."""
     buffer = np.zeros_like(buffer_out, dtype=np.float32)
-    writer = Writer(buffer)
+    writer = ArrayWriter(buffer)
 
     n = writer.write(np.array(write1, dtype=np.float32))
     assert n == n1_out

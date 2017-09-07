@@ -8,7 +8,7 @@ import pytest
 import numpy as np
 from numpy.testing import assert_almost_equal
 
-from audiotsm import io
+from audiotsm.io.array import ArrayReader, ArrayWriter
 from audiotsm.utils import CBuffer
 
 
@@ -119,7 +119,7 @@ def test_cbuffer_read(in_buffer, out_buffer, out_n, remaining_data):
     ]))
 def test_cbuffer_read_from(in_buffer, write_buffer, out_n, out_data):
     """Run tests for the CBuffer.write method."""
-    reader = io.array.Reader(np.array(write_buffer))
+    reader = ArrayReader(np.array(write_buffer))
     n = in_buffer.read_from(reader)
 
     assert n == out_n
@@ -170,7 +170,7 @@ def test_cbuffer_write(in_buffer, write_buffer, out_n, out_data):
 def test_cbuffer_write_to(in_buffer, out_buffer, out_n, remaining_data):
     """Run tests for the CBuffer.read method."""
     read_buffer = np.zeros_like(out_buffer, dtype=np.float32)
-    writer = io.array.Writer(read_buffer)
+    writer = ArrayWriter(read_buffer)
     n = in_buffer.write_to(writer)
 
     assert n == out_n
