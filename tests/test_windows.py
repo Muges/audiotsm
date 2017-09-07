@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 """
-Tests for the audiotsm.windows package.
+Tests for the audiotsm.utils.windows package.
 """
 
 import pytest
@@ -9,7 +9,7 @@ from pytest import approx
 import numpy as np
 from numpy.testing import assert_almost_equal
 
-from audiotsm import windows
+from audiotsm.utils import windows
 
 
 @pytest.mark.parametrize("buffer, window, out", [

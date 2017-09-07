@@ -1,14 +1,14 @@
 # -*- coding: utf-8 -*-
 
 """
-Tests for the audiotsm.cbuffer package.
+Tests for the audiotsm.utils.cbuffer package.
 """
 
 import pytest
 from pytest import approx
 import numpy as np
 
-from audiotsm.cbuffer import NormalizeBuffer
+from audiotsm.utils import NormalizeBuffer
 
 
 def generate_normalize_buffers(array):

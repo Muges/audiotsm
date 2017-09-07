@@ -1,14 +1,14 @@
 # -*- coding: utf-8 -*-
 
 """
-Tests for the audiotsm.cbuffer package.
+Tests for the audiotsm.utils.cbuffer package.
 """
 
 import pytest
 import numpy as np
 from numpy.testing import assert_almost_equal
 
-from audiotsm.cbuffer import CBuffer
+from audiotsm.utils import CBuffer
 
 
 def generate_cbuffers(array, max_length):
