@@ -198,6 +198,7 @@ class CBuffer(object):
 
         :param n: the number of samples to remove.
         :type n: int
+        :returns: the number of samples that were removed.
         """
         if n >= self._length:
             n = self._length
@@ -220,6 +221,8 @@ class CBuffer(object):
         self._ready -= n
         if self._ready < 0:
             self._ready = 0
+
+        return n
 
     def right_pad(self, n):
         """Add zeros to the right of the CBuffer.

@@ -100,6 +100,10 @@ class AnalysisSynthesisTSM(TSM):
         # how many samples should be skipped before reading the analysis frame.
         self._skip_input_samples = 0
 
+        # This attribute is used to start the output signal in the middle of a
+        # frame, which should be the peek of the window function
+        self._skip_output_samples = 0
+
         # Compute the normalize window
         self._normalize_window = windows.product(self._analysis_window,
                                                  self._synthesis_window)
@@ -121,6 +125,13 @@ class AnalysisSynthesisTSM(TSM):
         self._out_buffer.remove(self._out_buffer.length)
         self._out_buffer.right_pad(self._frame_length)
         self._normalize_buffer.remove(self._normalize_buffer.length)
+
+        # Left pad the input with half a frame of zeros, and ignore that half
+        # frame in the output. This makes the output signal start in the middle
+        # of a frame, which should be the peak of the window function.
+        self._in_buffer.write(
+            np.zeros((self._channels, self._frame_length // 2)))
+        self._skip_output_samples = self._frame_length // 2
 
         # Clear the converter
         self._converter.clear()
@@ -186,6 +197,12 @@ class AnalysisSynthesisTSM(TSM):
             # space in the output buffer to store the output
             self._process_frame()
 
+            # Skip output samples if necessary
+            skipped = self._out_buffer.remove(self._skip_output_samples)
+            self._out_buffer.right_pad(skipped)
+            self._skip_output_samples -= skipped
+
+            # Set the number of input samples to be skipped
             self._skip_input_samples = self._analysis_hop - self._frame_length
             if self._skip_input_samples < 0:
                 self._skip_input_samples = 0
