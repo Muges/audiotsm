@@ -55,6 +55,39 @@ class ArrayReader(base.Reader):
         return n
 
 
+class ArrayWriter(base.Writer):
+    """A Writer allowing to get the output of a TSM object as a
+    :class:`numpy.ndarray`."""
+
+    def __init__(self, channels):
+        self._channels = channels
+        self._data = []
+
+    @property
+    def channels(self):
+        return self._channels
+
+    def write(self, buffer):
+        if buffer.shape[0] != self._channels:
+            raise ValueError("the buffer should have the same number of "
+                             "channels as the ArrayWriter")
+
+        self._data.append(np.copy(buffer))
+
+        return buffer.shape[1]
+
+    @property
+    def data(self):
+        """The data that has been written."""
+        if not self._data:
+            return np.ndarray((self._channels, 0), dtype=np.float32)
+
+        data = np.concatenate(self._data, axis=1)
+        self._data = [data]
+
+        return data
+
+
 class FixedArrayWriter(base.Writer):
     """A Writer allowing to use :class:`numpy.ndarray` as output of a TSM
     object.

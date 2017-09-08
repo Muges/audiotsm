@@ -8,7 +8,7 @@ import pytest
 import numpy as np
 from numpy.testing import assert_almost_equal
 
-from audiotsm.io.array import ArrayReader, FixedArrayWriter
+from audiotsm.io.array import ArrayReader, ArrayWriter, FixedArrayWriter
 
 
 @pytest.mark.parametrize("data_in, read_out, n_out, data_out", [
@@ -82,8 +82,8 @@ def test_skip(data_in, n_in, n_out, data_out):
 
     ([[1, 2], [4, 5]], [[], []], 2, 0, [[1, 2, 0], [4, 5, 0]]),
 ])
-def test_write(write1, write2, n1_out, n2_out, buffer_out):
-    """Run tests for the ArrayWriter.write method."""
+def test_fixed_array_write(write1, write2, n1_out, n2_out, buffer_out):
+    """Run tests for the FixedArrayWriter.write method."""
     buffer = np.zeros_like(buffer_out, dtype=np.float32)
     writer = FixedArrayWriter(buffer)
 
@@ -93,3 +93,25 @@ def test_write(write1, write2, n1_out, n2_out, buffer_out):
     assert n == n2_out
 
     assert_almost_equal(buffer, buffer_out)
+
+
+@pytest.mark.parametrize("write1, write2, n1_out, n2_out, buffer_out", [
+    ([[], []], [[], []], 0, 0, [[], []]),
+
+    ([[1, 2, 3], [4, 5, 6]], [[], []], 3, 0, [[1, 2, 3], [4, 5, 6]]),
+    ([[1, 2], [4, 5]], [[3], [6]], 2, 1, [[1, 2, 3], [4, 5, 6]]),
+    ([[1], [4]], [[2, 3], [5, 6]], 1, 2, [[1, 2, 3], [4, 5, 6]]),
+    ([[], []], [[1, 2, 3], [4, 5, 6]], 0, 3, [[1, 2, 3], [4, 5, 6]]),
+
+    ([[1, 2], [4, 5]], [[], []], 2, 0, [[1, 2], [4, 5]]),
+])
+def test_array_write(write1, write2, n1_out, n2_out, buffer_out):
+    """Run tests for the ArrayWriter.write method."""
+    writer = ArrayWriter(len(write1))
+
+    n = writer.write(np.array(write1, dtype=np.float32))
+    assert n == n1_out
+    n = writer.write(np.array(write2, dtype=np.float32))
+    assert n == n2_out
+
+    assert_almost_equal(writer.data, buffer_out)
