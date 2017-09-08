@@ -28,6 +28,10 @@ class ArrayReader(base.Reader):
     def channels(self):
         return self._data.shape[0]
 
+    @property
+    def empty(self):
+        return self._data.shape[1] == 0
+
     def read(self, buffer):
         if buffer.shape[0] != self._data.shape[0]:
             raise ValueError("the two buffers should have the same number of "

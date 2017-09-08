@@ -16,6 +16,11 @@ class Reader(object):
         """The number of channels of the Reader."""
         raise NotImplementedError()
 
+    @property
+    def empty(self):
+        """True if there is no more data to read."""
+        raise NotImplementedError()
+
     def read(self, buffer):
         """Reads as many samples from the Reader as possible, write them to
         ``buffer``, and returns the number of samples that were read.
