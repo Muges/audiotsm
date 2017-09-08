@@ -13,6 +13,7 @@ from audiotsm.io.array import ArrayReader, ArrayWriter
 
 @pytest.mark.parametrize("data_in, read_out, n_out, data_out", [
     ([[]], [[]], 0, [[]]),
+    ([[]], [[0]], 0, [[]]),
     ([[1, 2, 3], [4, 5, 6]], [[], []], 0, [[1, 2, 3], [4, 5, 6]]),
     ([[1, 2, 3], [4, 5, 6]], [[1], [4]], 1, [[2, 3], [5, 6]]),
     ([[1, 2, 3], [4, 5, 6]], [[1, 2], [4, 5]], 2, [[3], [6]]),
@@ -23,9 +24,37 @@ def test_read(data_in, read_out, n_out, data_out):
     """Run tests for the ArrayReader.read method."""
     reader = ArrayReader(np.array(data_in))
 
-    buffer = np.zeros_like(read_out)
+    buffer = np.zeros_like(read_out, dtype=np.float32)
     n = reader.read(buffer)
     assert_almost_equal(buffer, read_out)
+    assert n == n_out
+
+    # Check the data remaining in the reader
+    buffer = np.zeros_like(data_out)
+    reader.read(buffer)
+    assert_almost_equal(buffer, data_out)
+
+    # Check that there is no more data in the reader
+    buffer = np.zeros_like(data_in)
+    n = reader.read(buffer)
+    assert not buffer.any()
+    assert n == 0
+
+
+@pytest.mark.parametrize("data_in, n_in, n_out, data_out", [
+    ([[]], 0, 0, [[]]),
+    ([[]], 1, 0, [[]]),
+    ([[1, 2, 3], [4, 5, 6]], 0, 0, [[1, 2, 3], [4, 5, 6]]),
+    ([[1, 2, 3], [4, 5, 6]], 1, 1, [[2, 3], [5, 6]]),
+    ([[1, 2, 3], [4, 5, 6]], 2, 2, [[3], [6]]),
+    ([[1, 2, 3], [4, 5, 6]], 3, 3, [[], []]),
+    ([[1, 2, 3], [4, 5, 6]], 4, 3, [[], []]),
+])
+def test_skip(data_in, n_in, n_out, data_out):
+    """Run tests for the ArrayReader.skip method."""
+    reader = ArrayReader(np.array(data_in))
+
+    n = reader.skip(n_in)
     assert n == n_out
 
     # Check the data remaining in the reader

@@ -36,6 +36,11 @@ class Reader(object):
         """
         raise NotImplementedError()
 
+    def skip(self, n):
+        """Try to skip ``n`` samples, an returns the number of samples that
+        were actually skipped."""
+        raise NotImplementedError()
+
 
 class Writer(object):
     """An abstract class for the output of a TSM object."""

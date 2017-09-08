@@ -46,6 +46,14 @@ class ArrayReader(base.Reader):
 
         return n
 
+    def skip(self, n):
+        if n > self._data.shape[1]:
+            n = self._data.shape[1]
+
+        self._data = self._data[:, n:]
+
+        return n
+
 
 class ArrayWriter(base.Writer):
     """A Writer allowing to use :class:`numpy.ndarray` as output of a TSM

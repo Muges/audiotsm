@@ -62,6 +62,14 @@ class WavReader(base.Reader):
         """The sample width in bytes of the wav file."""
         return self._reader.getsamplewidth()
 
+    def skip(self, n):
+        current_pos = self._reader.tell()
+        new_pos = min(current_pos + n, self._reader.getnframes())
+
+        self._reader.setpos(new_pos)
+
+        return new_pos - current_pos
+
     def __enter__(self):
         return self
 
