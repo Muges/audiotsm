@@ -55,7 +55,7 @@ class ArrayReader(base.Reader):
         return n
 
 
-class ArrayWriter(base.Writer):
+class FixedArrayWriter(base.Writer):
     """A Writer allowing to use :class:`numpy.ndarray` as output of a TSM
     object.
 

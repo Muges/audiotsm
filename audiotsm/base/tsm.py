@@ -8,7 +8,7 @@ This module provides a base classes for real-time audio time-scale modification
 procedures.
 """
 
-from audiotsm.io.array import ArrayReader, ArrayWriter
+from audiotsm.io.array import ArrayReader, FixedArrayWriter
 
 
 class TSM(object):
@@ -40,7 +40,7 @@ class TSM(object):
             equal to the length of the buffer, except when there is no more
             values to be written.
         """
-        return self.flush_to(ArrayWriter(buffer))
+        return self.flush_to(FixedArrayWriter(buffer))
 
     def flush_to(self, writer):
         """Writes as many output samples as possible to ``writer``, assuming
@@ -90,7 +90,7 @@ class TSM(object):
             :func:`TSM.put` to provide more input samples, or :func:`TSM.flush`
             if there is no input samples remaining.
         """
-        return self.write_to(ArrayWriter(buffer))[0]
+        return self.write_to(FixedArrayWriter(buffer))[0]
 
     def remaining_input_space(self):
         """Return the number of samples that can be processed by the
