@@ -95,6 +95,11 @@ class AnalysisSynthesisTSM(TSM):
         self._analysis_window = analysis_window
         self._synthesis_window = synthesis_window
 
+        # When the analysis hop is larger than the frame length, some samples
+        # from the input need to be skipped. self._skip_input_samples tracks
+        # how many samples should be skipped before reading the analysis frame.
+        self._skip_input_samples = 0
+
         # Compute the normalize window
         self._normalize_window = windows.product(self._analysis_window,
                                                  self._synthesis_window)
@@ -168,7 +173,12 @@ class AnalysisSynthesisTSM(TSM):
         self._normalize_buffer.remove(self._synthesis_hop)
 
     def read_from(self, reader):
-        n = self._in_buffer.read_from(reader)
+        n = reader.skip(self._skip_input_samples)
+        self._skip_input_samples -= n
+        if self._skip_input_samples > 0:
+            return n
+
+        n += self._in_buffer.read_from(reader)
 
         if (self._in_buffer.remaining_length == 0 and
                 self._out_buffer.remaining_length >= self._synthesis_hop):
@@ -176,10 +186,14 @@ class AnalysisSynthesisTSM(TSM):
             # space in the output buffer to store the output
             self._process_frame()
 
+            self._skip_input_samples = self._analysis_hop - self._frame_length
+            if self._skip_input_samples < 0:
+                self._skip_input_samples = 0
+
         return n
 
     def remaining_input_space(self):
-        return self._in_buffer.remaining_length
+        return self._skip_input_samples + self._in_buffer.remaining_length
 
     def set_speed(self, speed):
         self._analysis_hop = int(self._synthesis_hop * speed)
