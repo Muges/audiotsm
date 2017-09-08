@@ -183,6 +183,11 @@ class CBuffer(object):
         return n
 
     @property
+    def ready(self):
+        """The number of samples that can be read."""
+        return self._ready
+
+    @property
     def remaining_length(self):
         """The number of samples that can be added to the CBuffer."""
         return self._max_length - self._ready
