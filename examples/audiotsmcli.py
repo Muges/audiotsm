@@ -12,6 +12,7 @@ import argparse
 import os
 
 from audiotsm.ola import ola
+from audiotsm.io.sounddevice import StreamWriter
 from audiotsm.io.wav import WavReader, WavWriter
 
 
@@ -21,19 +22,24 @@ def main():
     # Parse command line arguments
     parser = argparse.ArgumentParser(description=(
         "Change the speed of an audio file without changing its pitch."))
-    parser.add_argument('-s', '--speed', metavar="S", type=float, default=1.,
-                        help=("Set the speed ratio (e.g 0.5 to play at half "
-                              "speed)"))
-    parser.add_argument('-l', '--frame-length', metavar='N', type=int,
-                        default=None, help=("Set the frame length to N."))
-    parser.add_argument('-a', '--analysis-hop', metavar='N', type=int,
-                        default=None, help=("Set the analysis hop to N."))
-    parser.add_argument('--synthesis-hop', metavar='N', type=int, default=None,
-                        help=("Set the synthesis hop to N."))
-    parser.add_argument('input_filename', metavar='INPUT_FILENAME', type=str,
-                        help=("The audio input file"))
-    parser.add_argument('output_filename', metavar='OUTPUT_FILENAME', type=str,
-                        help=("The audio output file"))
+    parser.add_argument(
+        '-s', '--speed', metavar="S", type=float, default=1.,
+        help=("Set the speed ratio (e.g 0.5 to play at half speed)"))
+    parser.add_argument(
+        '-l', '--frame-length', metavar='N', type=int, default=None,
+        help=("Set the frame length to N."))
+    parser.add_argument(
+        '-a', '--analysis-hop', metavar='N', type=int, default=None,
+        help=("Set the analysis hop to N."))
+    parser.add_argument(
+        '--synthesis-hop', metavar='N', type=int, default=None,
+        help=("Set the synthesis hop to N."))
+    parser.add_argument(
+        '-o', '--output', metavar='FILENAME', type=str, default=None,
+        help=("Write the output in the wav file FILENAME."))
+    parser.add_argument(
+        'input_filename', metavar='INPUT_FILENAME', type=str,
+        help=("The audio input file"))
 
     args = parser.parse_args()
 
@@ -43,24 +49,25 @@ def main():
 
     # Get TSM method parameters
     parameters = {}
-    if args.speed is not None:
+    if args.speed:
         parameters['speed'] = args.speed
-    if args.frame_length is not None:
+    if args.frame_length:
         parameters['frame_length'] = args.frame_length
-    if args.analysis_hop is not None:
+    if args.analysis_hop:
         parameters['analysis_hop'] = args.analysis_hop
-    if args.speed is not None:
-        parameters['speed'] = args.speed
+    if args.synthesis_hop:
+        parameters['synthesis_hop'] = args.synthesis_hop
 
-    # Get input and output files
-    input_filename = args.input_filename
-    output_filename = args.output_filename
+    reader = WavReader(args.input_filename)
+    if args.output:
+        writer = WavWriter(args.output, reader.channels, reader.samplerate)
+    else:
+        writer = StreamWriter(reader.channels, reader.samplerate)
 
     # Run the TSM procedure
-    with WavReader(input_filename) as reader:
-        channels = reader.channels
-        with WavWriter(output_filename, channels, reader.samplerate) as writer:
-            tsm = ola(channels, **parameters)
+    with reader:
+        with writer:
+            tsm = ola(reader.channels, **parameters)
 
             finished = False
             while not (finished and reader.empty):

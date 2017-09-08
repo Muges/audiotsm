@@ -4,8 +4,8 @@
 audiotsm.io.wav
 ~~~~~~~~~~~~~~~
 
-This module provides a Reader and a Writer allowing to use
-wav files as input and output of a TSM object.
+This module provides a Reader and a Writer allowing to use wav files as input
+and output of a TSM object.
 """
 
 import wave
