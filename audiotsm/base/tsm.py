@@ -113,7 +113,6 @@ class TSM(object):
         while not finished:
             _, finished = self.flush_to(writer)
 
-
     def set_speed(self, speed):
         """Set the speed ratio."""
         raise NotImplementedError
