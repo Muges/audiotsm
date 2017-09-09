@@ -5,8 +5,11 @@ AudioTSM is a python library for real-time audio time-scale modification
 procedures, i.e. algorithms that change the speed of an audio signal without
 changing its pitch.
 
+Documentation:
+   https://audiotsm.readthedocs.io/
+
 Source code repository and issue tracker:
-   http://github.com/Muges/audiotsm
+   https://github.com/Muges/audiotsm/
 
 License:
    MIT -- see the file ``LICENSE`` for details.
@@ -25,16 +28,16 @@ A package should be available on PyPI soon.
 You may also need to install the sounddevice_ library in order to run the
 examples or to use a ``StreamWriter``.
 
-.. _sounddevice: http://github.com/spatialaudio/python-sounddevice/
+.. _sounddevice: https://github.com/spatialaudio/python-sounddevice/
 
 Basic usage
 -----------
 
 The audiotsm package implements several time-scale modification procedures:
 
- - OLA (Overlap-Add), which should only be used for percussive audio signals;
- - WSOLA (Waveform Similarity-based Overlap-Add), an amelioration of the OLA
-   procedure which should give good results on most inputs.
+- OLA (Overlap-Add), which should only be used for percussive audio signals;
+- WSOLA (Waveform Similarity-based Overlap-Add), an amelioration of the OLA
+  procedure which should give good results on most inputs.
 
 Below is a basic example showing how to reduce the speed of a wav file by half
 using the WSOLA procedure::
