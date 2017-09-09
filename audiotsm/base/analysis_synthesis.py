@@ -80,10 +80,19 @@ class AnalysisSynthesisTSM(TSM):
     :type analysis_window: :class:`numpy.ndarray`
     :param synthesis_window: a window applied to the synthesis frames
     :type synthesis_window: :class:`numpy.ndarray`
+    :param delta_before: the number of samples preceding an analysis frame that
+        the converter requires (this is usually 0, except for WSOLA-like
+        methods)
+    :type delta_before: int
+    :param delta_after: the number of samples following an analysis frame that
+        the converter requires (this is usually 0, except for WSOLA-like
+        methods)
+    :type delta_after: int
     """  # noqa: E501
     # pylint: disable=too-many-instance-attributes
     def __init__(self, converter, channels, frame_length, analysis_hop,
-                 synthesis_hop, analysis_window, synthesis_window):
+                 synthesis_hop, analysis_window, synthesis_window,
+                 delta_before=0, delta_after=0):
         # pylint: disable=too-many-arguments
         self._converter = converter
 
@@ -94,6 +103,9 @@ class AnalysisSynthesisTSM(TSM):
 
         self._analysis_window = analysis_window
         self._synthesis_window = synthesis_window
+
+        self._delta_before = delta_before
+        self._delta_after = delta_after
 
         # When the analysis hop is larger than the frame length, some samples
         # from the input need to be skipped. self._skip_input_samples tracks
@@ -112,8 +124,10 @@ class AnalysisSynthesisTSM(TSM):
             self._normalize_window = np.ones(self._frame_length)
 
         # Initialize the buffers
-        self._in_buffer = CBuffer(self._channels, self._frame_length)
-        self._analysis_frame = np.empty((self._channels, self._frame_length))
+        delta = self._delta_before + self._delta_after
+        self._in_buffer = CBuffer(self._channels, self._frame_length + delta)
+        self._analysis_frame = np.empty(
+            (self._channels, self._frame_length + delta))
         self._out_buffer = CBuffer(self._channels, self._frame_length)
         self._normalize_buffer = NormalizeBuffer(self._frame_length)
 
@@ -129,8 +143,8 @@ class AnalysisSynthesisTSM(TSM):
         # Left pad the input with half a frame of zeros, and ignore that half
         # frame in the output. This makes the output signal start in the middle
         # of a frame, which should be the peak of the window function.
-        self._in_buffer.write(
-            np.zeros((self._channels, self._frame_length // 2)))
+        self._in_buffer.write(np.zeros(
+            (self._channels, self._delta_before + self._frame_length // 2)))
         self._skip_output_samples = self._frame_length // 2
 
         # Clear the converter
