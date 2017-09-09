@@ -2,8 +2,11 @@ A real-time audio time-scale modification library
 =================================================
 
 .. image:: https://readthedocs.org/projects/audiotsm/badge/?version=latest
-:target: http://audiotsm.readthedocs.io/en/latest/?badge=latest
-:alt: Documentation Status
+    :target: http://audiotsm.readthedocs.io/en/latest/?badge=latest
+    :alt: Documentation Status
+.. image:: https://travis-ci.org/Muges/audiotsm.svg?branch=master
+    :target: https://travis-ci.org/Muges/audiotsm
+    :alt: Build Status
 
 AudioTSM is a python library for real-time audio time-scale modification
 procedures, i.e. algorithms that change the speed of an audio signal without
