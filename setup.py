@@ -17,7 +17,10 @@ changing its pitch.
 import ast
 import re
 from setuptools import setup, find_packages
-from sphinx.setup_command import BuildDoc
+try:
+    from sphinx.setup_command import BuildDoc
+except ImportError:
+    BuildDoc = None
 
 
 _version_re = re.compile(r'__version__\s+=\s+(.*)')
@@ -52,6 +55,10 @@ setup(
         "pylint",
         "flake8"
     ],
+    extras_require={
+        "doc": ["sphinx", "sphinx_rtd_theme"],
+        "StreamWriter": ["sounddevice"]
+    },
 
     cmdclass={
         'doc': BuildDoc
