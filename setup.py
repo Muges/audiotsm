@@ -46,14 +46,12 @@ setup(
     ],
     setup_requires=[
         "pytest-runner",
-        "pytest-pylint",
-        "pytest-flake8",
-        "pytest-coverage",
     ],
     tests_require=[
         "pytest",
-        "pylint",
-        "flake8"
+        "pytest-pylint",
+        "pytest-flake8",
+        "pytest-coverage",
     ],
     extras_require={
         "doc": ["sphinx", "sphinx_rtd_theme"],
