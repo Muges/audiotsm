@@ -11,7 +11,7 @@ Run a TSM procedure on a signal generated with numpy.
 
 import numpy as np
 import sounddevice as sd
-from audiotsm.ola import ola
+from audiotsm import wsola
 from audiotsm.io.array import ArrayReader, ArrayWriter
 
 
@@ -28,7 +28,7 @@ input_signal = np.sin(np.pi * frequency * time).reshape((1, -1))
 reader = ArrayReader(input_signal)
 writer = ArrayWriter(channels=1)
 
-tsm = ola(channels=1, speed=0.5)
+tsm = wsola(channels=1, speed=0.5)
 tsm.run(reader, writer)
 
 # Play the output

@@ -11,8 +11,8 @@ Change the speed of an audio file without changing its pitch.
 import argparse
 import os
 
-from audiotsm.ola import ola
-from audiotsm.wsola import wsola
+from audiotsm import ola
+from audiotsm import wsola
 from audiotsm.io.sounddevice import StreamWriter
 from audiotsm.io.wav import WavReader, WavWriter
 

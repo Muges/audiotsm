@@ -13,3 +13,7 @@ changing its pitch.
 """
 
 __version__ = "0.1.0"
+
+
+from .ola import ola  # noqa: F401
+from .wsola import wsola  # noqa: F401
