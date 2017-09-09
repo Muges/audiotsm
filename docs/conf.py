@@ -14,19 +14,22 @@
 # serve to show the default.
 
 import os
-import sys
-import pkg_resources
+import re
 
-READTHEDOCS = os.environ.get('READTHEDOCS') == 'True'
-if READTHEDOCS:
-    sys.path.insert(0, os.path.abspath('..'))
 
-try:
-    _release = pkg_resources.get_distribution('audiotsm').version
-except pkg_resources.DistributionNotFound:
-    print('audiotsm must be installed to build the documentation.')
-    print('Install from source using `pip install -e .` in a virtualenv.')
-    sys.exit(1)
+def find_version():
+    """Read the package's version from __init__.py"""
+    version_filename = os.path.abspath("../audiotsm/__init__.py")
+    with open(version_filename) as fileobj:
+        version_content = fileobj.read()
+    version_match = re.search(r"^__version__ = ['\"]([^'\"]*)['\"]",
+                              version_content, re.M)
+    if version_match:
+        return version_match.group(1)
+    raise RuntimeError("Unable to find version string.")
+
+
+_release = find_version()
 
 # -- General configuration ------------------------------------------------
 
