@@ -12,8 +12,33 @@ import argparse
 import os
 
 from audiotsm.ola import ola
+from audiotsm.wsola import wsola
 from audiotsm.io.sounddevice import StreamWriter
 from audiotsm.io.wav import WavReader, WavWriter
+
+
+def create_writer(output, reader):
+    """Create a Writer with the same parameters as ``reader``.
+
+    :param output: the path of the output wav file. If it is None, the output
+        will be played with a StreamWriter.
+    :type output: str
+    :param reader: the WavReader used as input of the TSM
+    """
+    if output:
+        return WavWriter(output, reader.channels, reader.samplerate)
+
+    return StreamWriter(reader.channels, reader.samplerate)
+
+
+def create_tsm(name, channels, parameters):
+    """Create a TSM object given the method name and its parameters."""
+    if name == "wsola":
+        return wsola(channels, **parameters)
+    if name == "ola":
+        return ola(channels, **parameters)
+
+    raise ValueError("unknown TSM method: {}".format(name))
 
 
 def main():
@@ -24,22 +49,28 @@ def main():
         "Change the speed of an audio file without changing its pitch."))
     parser.add_argument(
         '-s', '--speed', metavar="S", type=float, default=1.,
-        help=("Set the speed ratio (e.g 0.5 to play at half speed)"))
+        help="Set the speed ratio (e.g 0.5 to play at half speed)")
+    parser.add_argument(
+        '-m', '--method', type=str, default="wsola",
+        help="Select the TSM method (ola or wsola)")
     parser.add_argument(
         '-l', '--frame-length', metavar='N', type=int, default=None,
-        help=("Set the frame length to N."))
+        help="Set the frame length to N.")
     parser.add_argument(
         '-a', '--analysis-hop', metavar='N', type=int, default=None,
-        help=("Set the analysis hop to N."))
+        help="Set the analysis hop to N.")
     parser.add_argument(
         '--synthesis-hop', metavar='N', type=int, default=None,
-        help=("Set the synthesis hop to N."))
+        help="Set the synthesis hop to N.")
+    parser.add_argument(
+        '-t', '--tolerance', metavar='N', type=int, default=None,
+        help="Set the tolerance to N (only used when method is set wsola).")
     parser.add_argument(
         '-o', '--output', metavar='FILENAME', type=str, default=None,
-        help=("Write the output in the wav file FILENAME."))
+        help="Write the output in the wav file FILENAME.")
     parser.add_argument(
         'input_filename', metavar='INPUT_FILENAME', type=str,
-        help=("The audio input file"))
+        help="The audio input file")
 
     args = parser.parse_args()
 
@@ -57,26 +88,14 @@ def main():
         parameters['analysis_hop'] = args.analysis_hop
     if args.synthesis_hop:
         parameters['synthesis_hop'] = args.synthesis_hop
-
-    reader = WavReader(args.input_filename)
-    if args.output:
-        writer = WavWriter(args.output, reader.channels, reader.samplerate)
-    else:
-        writer = StreamWriter(reader.channels, reader.samplerate)
+    if args.tolerance is not None and args.method == "wsola":
+        parameters['tolerance'] = args.tolerance
 
     # Run the TSM procedure
-    with reader:
-        with writer:
-            tsm = ola(reader.channels, **parameters)
-
-            finished = False
-            while not (finished and reader.empty):
-                tsm.read_from(reader)
-                _, finished = tsm.write_to(writer)
-
-            finished = False
-            while not finished:
-                _, finished = tsm.flush_to(writer)
+    with WavReader(args.input_filename) as reader:
+        with create_writer(args.output, reader) as writer:
+            tsm = create_tsm(args.method, reader.channels, parameters)
+            tsm.run(reader, writer)
 
 
 if __name__ == "__main__":

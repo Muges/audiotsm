@@ -29,15 +29,7 @@ reader = ArrayReader(input_signal)
 writer = ArrayWriter(channels=1)
 
 tsm = ola(channels=1, speed=0.5)
-
-finished = False
-while not (finished and reader.empty):
-    tsm.read_from(reader)
-    _, finished = tsm.write_to(writer)
-
-finished = False
-while not finished:
-    _, finished = tsm.flush_to(writer)
+tsm.run(reader, writer)
 
 # Play the output
 # This example was written to show how to use an ArrayWriter. If you want to
