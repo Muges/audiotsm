@@ -34,5 +34,5 @@ tsm.run(reader, writer)
 # Play the output
 # This example was written to show how to use an ArrayWriter. If you want to
 # play the output of a TSM procedure you should use an
-# audiotsm.io.sounddevice.StreamWriter.
+# audiotsm.io.stream.StreamWriter.
 sd.play(np.ascontiguousarray(writer.data.T), samplerate, blocking=True)

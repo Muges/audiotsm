@@ -1,8 +1,8 @@
 # -*- coding: utf-8 -*-
 
 """
-audiotsm.io.sounddevice
-~~~~~~~~~~~~~~~~~~~~~~~
+audiotsm.io.stream
+~~~~~~~~~~~~~~~~~~
 
 This module provides a Writer allowing to play the output of a TSM object
 directly.

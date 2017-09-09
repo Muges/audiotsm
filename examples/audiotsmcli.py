@@ -13,7 +13,7 @@ import os
 
 from audiotsm import ola
 from audiotsm import wsola
-from audiotsm.io.sounddevice import StreamWriter
+from audiotsm.io.stream import StreamWriter
 from audiotsm.io.wav import WavReader, WavWriter
 
 
