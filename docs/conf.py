@@ -13,8 +13,13 @@
 # All configuration values have a default; values that are commented out
 # serve to show the default.
 
+import os
 import sys
 import pkg_resources
+
+READTHEDOCS = os.environ.get('READTHEDOCS') == 'True'
+if READTHEDOCS:
+    sys.path.insert(0, os.path.abspath('..'))
 
 try:
     _release = pkg_resources.get_distribution('audiotsm').version
