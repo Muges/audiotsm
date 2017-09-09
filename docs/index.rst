@@ -10,7 +10,8 @@ Welcome to audiotsm's documentation!
    :maxdepth: 4
    :caption: Contents:
 
-   audiotsm
+   userapi
+   internalapi
 
 
 Indices and tables

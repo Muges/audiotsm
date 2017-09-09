@@ -246,7 +246,7 @@ class CBuffer(object):
         :param n: the number of samples to mark as ready to be read.
         :type n: int
         :raises ValueError: if there is less than ``n`` samples that are not
-        ready yet.
+            ready yet.
         """
         if self._ready + n > self._length:
             raise ValueError("not enough samples to be marked as ready")

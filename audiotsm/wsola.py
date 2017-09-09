@@ -85,7 +85,7 @@ def wsola(channels=2, speed=1., frame_length=1024, analysis_hop=None,
         consecutive synthesis frames (half the frame_length by default)
     :type synthesis_hop: int
     :param tolerance: the maximum number of samples that the analysis frame can
-    be shifted.
+        be shifted.
     :type tolerance: int
     :returns: a :class:`base.TSM` object
     """

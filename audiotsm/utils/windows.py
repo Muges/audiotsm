@@ -1,8 +1,8 @@
 # -*- coding: utf-8 -*-
 
 """
-audiotsm.windows
-~~~~~~~~~~~~~~~~
+audiotsm.utils.windows
+~~~~~~~~~~~~~~~~~~~~~~
 
 This module contains window functions used for digital signal processing.
 """
