@@ -97,6 +97,23 @@ class TSM(object):
         :func:`TSM.put` method."""
         raise NotImplementedError
 
+    def run(self, reader, writer):
+        """Run the TSM procedure on the content of ``reader`` and write the
+        output to ``writer``.
+
+        :param reader: a :class:`audiotsm.io.Reader`
+        :param writer: a :class:`audiotsm.io.Writer`
+        """
+        finished = False
+        while not (finished and reader.empty):
+            self.read_from(reader)
+            _, finished = self.write_to(writer)
+
+        finished = False
+        while not finished:
+            _, finished = self.flush_to(writer)
+
+
     def set_speed(self, speed):
         """Set the speed ratio."""
         raise NotImplementedError
