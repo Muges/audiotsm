@@ -5,7 +5,6 @@ Tests for the audiotsm.utils.windows package.
 """
 
 import pytest
-from pytest import approx
 import numpy as np
 from numpy.testing import assert_almost_equal
 
@@ -35,7 +34,7 @@ def test_apply(buffer, window, out):
 ])
 def test_hanning(length, window):
     """Run tests for hanning."""
-    assert windows.hanning(length) == approx(np.array(window))
+    assert_almost_equal(windows.hanning(length), np.array(window))
 
 
 @pytest.mark.parametrize("window1, window2, out", [

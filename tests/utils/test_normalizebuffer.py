@@ -5,8 +5,7 @@ Tests for the audiotsm.utils.normalizebuffer package.
 """
 
 import pytest
-from pytest import approx
-import numpy as np
+from numpy.testing import assert_almost_equal
 
 from audiotsm.utils import NormalizeBuffer
 
@@ -38,7 +37,7 @@ def generate_test_cases(cases):
 def test_normalize_buffer_add(buffer, window, out):
     """Run tests for the NormalizeBuffer.add method."""
     buffer.add(window)
-    assert buffer.to_array() == approx(out)
+    assert_almost_equal(buffer.to_array(), out)
 
 
 @pytest.mark.parametrize("buffer, n, out", generate_test_cases([
@@ -54,7 +53,7 @@ def test_normalize_buffer_add(buffer, window, out):
 def test_normalize_buffer_remove(buffer, n, out):
     """Run tests for the NormalizeBuffer.remove method."""
     buffer.remove(n)
-    assert buffer.to_array() == approx(np.array(out))
+    assert_almost_equal(buffer.to_array(), out)
 
 
 @pytest.mark.parametrize("buffer, start, end, out", generate_test_cases([
@@ -74,4 +73,4 @@ def test_normalize_buffer_remove(buffer, n, out):
 ]))
 def test_normalize_buffer_to_array(buffer, start, end, out):
     """Run tests for the NormalizeBuffer.to_array method."""
-    assert buffer.to_array(start, end) == approx(np.array(out))
+    assert_almost_equal(buffer.to_array(start, end), out)
