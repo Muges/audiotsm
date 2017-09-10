@@ -29,11 +29,14 @@ with open('audiotsm/__init__.py', 'rb') as f:
     version = str(ast.literal_eval(_version_re.search(
         f.read().decode('utf-8')).group(1)))
 
+with open('README.rst', 'r') as f:
+    long_description = f.read()
+
 setup(
     name="audiotsm",
     version=version,
     description="A real-time audio time-scale modification library",
-    long_description=__doc__,
+    long_description=long_description,
     license="MIT",
     url="https://github.com/Muges/audiotsm",
     author="Muges",
