@@ -40,7 +40,7 @@ class TSM(object):
             equal to the length of the buffer, except when there is no more
             values to be written.
         """
-        return self.flush_to(FixedArrayWriter(buffer))
+        return self.flush_to(FixedArrayWriter(buffer))[0]
 
     def flush_to(self, writer):
         """Writes as many output samples as possible to ``writer``, assuming
