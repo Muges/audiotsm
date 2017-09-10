@@ -26,7 +26,7 @@ def generate_test_cases(cases):
     ``data``."""
     for case in cases:
         for buffer in generate_normalize_buffers(case[0]):
-            yield (buffer, *case[1:])
+            yield (buffer,) + case[1:]
 
 
 @pytest.mark.parametrize("buffer, window, out", generate_test_cases([

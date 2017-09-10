@@ -34,7 +34,7 @@ def generate_test_cases(cases):
     ``data``."""
     for case in cases:
         for buffer in generate_cbuffers(*case[:3]):
-            yield (buffer, *case[3:])
+            yield (buffer,) + case[3:]
 
 
 @pytest.mark.parametrize("in_buffer, add, out", generate_test_cases([
