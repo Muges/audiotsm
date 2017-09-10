@@ -1,9 +1,13 @@
 .. toctree::
    :maxdepth: 4
-   :caption: Contents:
+   :caption: Contents
 
    index
-   userapi
+
+.. toctree::
+   :maxdepth: 4
+   :caption: API
+
+   tsm
+   io
    internalapi
-
-

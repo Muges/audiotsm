@@ -1,18 +1,24 @@
 # -*- coding: utf-8 -*-
 
 """
-A real-time audio time-scale modification library
-=================================================
+The :mod:`audiotsm` module provides several time-scale modification procedures:
 
-AudioTSM is a python library for real-time audio time-scale modification
-procedures, i.e. algorithms that change the speed of an audio signal without
-changing its pitch.
+- :func:`~audiotsm.ola` (Overlap-Add), which should only be used for percussive
+  audio signals;
+- :func:`~audiotsm.wsola` (Waveform Similarity-based Overlap-Add), which should
+  give good results on most inputs.
 
-Source code repository and issue tracker:
-   http://github.com/Muges/audiotsm
+.. note::
 
-License:
-   MIT -- see the file ``LICENSE`` for details.
+    If you are not sure which procedure and parameters to use, using
+    :func:`~audiotsm.wsola` with the default parameters should work in most
+    cases.
+
+Each of the function of this module returns a :class:`~audiotsm.base.tsm.TSM`
+object which implements a time-scale modification procedure.
+
+.. autofunction:: audiotsm.ola
+.. autofunction:: audiotsm.wsola
 """
 
 __version__ = "0.1.0"

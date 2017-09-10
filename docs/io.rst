@@ -1,20 +1,5 @@
-User API
-========
-
-Time-Scale Modification procedures
-----------------------------------
-
-.. autofunction:: audiotsm.ola
-.. autofunction:: audiotsm.wsola
-
-TSM object
-----------
-
-.. autoclass:: audiotsm.base.TSM
-    :members:
-
 Readers and Writers
--------------------
+===================
 
 .. automodule:: audiotsm.io.base
     :members:

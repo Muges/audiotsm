@@ -1,11 +1,8 @@
 # -*- coding: utf-8 -*-
 
 """
-audiotsm.base
-~~~~~~~~~~~~~
-
-This module provides a base classes for real-time audio time-scale modification
-procedures.
+The :mod:`audiotsm.base.tsm` module provides a base class for real-time audio
+time-scale modification procedures.
 """
 
 from audiotsm.io.array import ArrayReader, FixedArrayWriter
@@ -15,12 +12,14 @@ class TSM(object):
     """An abstract class for real-time audio time-scale modification
     procedures.
 
-    The buffers used in arguments of the :func:`TSM.flush`, :func:`TSM.put` and
-    :func:`TSM.receive` methods should be matrices of shape (m, n), where m is
-    the number of channels, and n is the number of samples per channels. For
-    example, if a ``buffer`` contains a stereo signal, it should be a matrix
-    with two rows, ``buffer[0][i]`` should be the i-th sample of the left
-    channel, and ``buffer[1][i]`` the i-th sample of the right channel.
+    The buffers used in arguments of the :func:`~audiotsm.base.tsm.TSM.flush`,
+    :func:`~audiotsm.base.tsm.TSM.put` and
+    :func:`~audiotsm.base.tsm.TSM.receive` methods should be matrices of shape
+    (m, n), where m is the number of channels, and n is the number of samples
+    per channels. For example, if a ``buffer`` contains a stereo signal, it
+    should be a matrix with two rows, ``buffer[0][i]`` should be the i-th
+    sample of the left channel, and ``buffer[1][i]`` the i-th sample of the
+    right channel.
     """
 
     def clear(self):
