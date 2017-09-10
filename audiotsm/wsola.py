@@ -61,31 +61,31 @@ def wsola(channels, speed=1., frame_length=1024, analysis_hop=None,
     """Returns a :class:`~audiotsm.base.tsm.TSM` object implementing the WSOLA
     (Waveform Similarity-based Overlap-Add) time-scale modification procedure.
 
-    In most cases, you should not need to set the :obj:`frame_length`, the
-    :obj:`analysis_hop`, the :obj:`synthesis_hop`, or the :obj:`tolerance`. If
-    you want to fine tune these parameters, you can check the documentation of
-    the :class:`~audiotsm.base.analysis_synthesis.AnalysisSynthesisTSM` class
-    to see what the first three represent.
+    In most cases, you should not need to set the ``frame_length``, the
+    ``analysis_hop``, the ``synthesis_hop``, or the ``tolerance``. If you want
+    to fine tune these parameters, you can check the documentation of the
+    :class:`~audiotsm.base.analysis_synthesis.AnalysisSynthesisTSM` class to
+    see what the first three represent.
 
     WSOLA works in the same way as OLA, with the exception that it allows
-    slight shift (at most :obj:`tolerance`) of the position of the analysis
+    slight shift (at most ``tolerance``) of the position of the analysis
     frames.
 
     :param channels: the number of channels of the input signal.
     :type channels: int
-    :param speed: (optional) the speed ratio by which the speed of the signal
-        will be multiplied (for example, if :obj:`speed` is set to 0.5, the
-        output signal will be half as fast as the input signal).
-    :type speed: float
-    :param frame_length: (optional) the length of the frames.
-    :type frame_length: int
-    :param analysis_hop: (optional) the number of samples between two
-        consecutive analysis frames (``speed * synthesis_hop`` by default). If
-        :obj:`analysis_hop` is set, the :obj:`speed` parameter will be ignored.
-    :type analysis_hop: int
-    :param synthesis_hop: (optional) the number of samples between two
-        consecutive synthesis frames (``frame_length // 2`` by default).
-    :type synthesis_hop: int
+    :param speed: the speed ratio by which the speed of the signal will be
+        multiplied (for example, if ``speed`` is set to 0.5, the output signal
+        will be half as fast as the input signal).
+    :type speed: float, optional
+    :param frame_length: the length of the frames.
+    :type frame_length: int, optional
+    :param analysis_hop: the number of samples between two consecutive analysis
+        frames (``speed * synthesis_hop`` by default). If ``analysis_hop`` is
+        set, the ``speed`` parameter will be ignored.
+    :type analysis_hop: int, optional
+    :param synthesis_hop: the number of samples between two consecutive
+        synthesis frames (``frame_length // 2`` by default).
+    :type synthesis_hop: int, optional
     :param tolerance: the maximum number of samples that the analysis frame can
         be shifted.
     :type tolerance: int
