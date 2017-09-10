@@ -1,11 +1,9 @@
 # -*- coding: utf-8 -*-
 
 """
-audiotsm.io.stream
-~~~~~~~~~~~~~~~~~~
-
-This module provides a Writer allowing to play the output of a TSM object
-directly.
+The :mod:`audiotsm.io.stream` module provides a
+:class:`~audiotsm.io.base.Writer` allowing to play the output of a
+:class:`~audiotsm.base.tsm.TSM` object in real-time.
 """
 
 
@@ -16,7 +14,24 @@ from . import base
 
 
 class StreamWriter(base.Writer):
-    """A Writer allowing to play the output of a TSM object directly."""
+    """A :class:`~audiotsm.io.base.Writer` allowing to play the output of a
+    :class:`~audiotsm.base.tsm.TSM` object directly.
+
+    You should stop the :class:`~audiotsm.io.stream.StreamWriter` after using
+    it with the :func:`~audiotsm.io.stream.StreamWriter.stop` method, or use it
+    in a ``with`` statement as follow::
+
+        with WavWriter(2, 44100) as writer:
+            # use writer...
+
+    :param channels: the number of channels of the signal.
+    :type channels: int
+    :param samplerate: the sampling rate of the signal.
+    :type samplerate: int
+    :param attrs: additional parameters used to create the
+        :class:`sounddevice.OutputStream` that is used by the
+        :class:`~audiotsm.io.stream.StreamWriter`.
+    """
     def __init__(self, channels, samplerate, **attrs):
         self._channels = channels
 

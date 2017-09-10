@@ -91,7 +91,9 @@ pygments_style = 'sphinx'
 todo_include_todos = True
 
 intersphinx_mapping = {
-    'numpy': ('http://docs.scipy.org/doc/numpy/', None)
+    'numpy': ('https://docs.scipy.org/doc/numpy/', None),
+    'sounddevice':
+        ('https://python-sounddevice.readthedocs.io/en/latest/', None)
 }
 
 

@@ -1,9 +1,9 @@
 # -*- coding: utf-8 -*-
 
 """
-The :mod:`audiotsm.io.wav` provides a :class:`~audiotsm.io.base.Reader` and a
-:class:`~audiotsm.io.base.Writer` allowing to use wav files as input or output
-of a :class:`~audiotsm.base.tsm.TSM` object.
+The :mod:`audiotsm.io.wav` module provides a :class:`~audiotsm.io.base.Reader`
+and a :class:`~audiotsm.io.base.Writer` allowing to use wav files as input or
+output of a :class:`~audiotsm.base.tsm.TSM` object.
 """
 
 import wave
@@ -16,8 +16,9 @@ class WavReader(base.Reader):
     """A :class:`~audiotsm.io.base.Reader` allowing to use a wav file as input
     of a :class:`~audiotsm.base.tsm.TSM` object.
 
-    You should close the :class:`~audiotsm.io.wav.WavReader` after using it, or
-    use it in a ``with`` statement as follow::
+    You should close the :class:`~audiotsm.io.wav.WavReader` after using it
+    with the :func:`~audiotsm.io.wav.WavReader.close` method, or use it in a
+    ``with`` statement as follow::
 
         with WavReader(filename) as reader:
             # use reader...
@@ -86,8 +87,9 @@ class WavWriter(base.Writer):
     """A :class:`~audiotsm.io.base.Writer` allowing to use a wav file as output
     of a :class:`~audiotsm.base.tsm.TSM` object.
 
-    You should close the :class:`~audiotsm.io.wav.WavWriter` after using it, or
-    use it in a ``with`` statement as follow::
+    You should close the :class:`~audiotsm.io.wav.WavWriter` after using it
+    with the :func:`~audiotsm.io.wav.WavWriter.close` method, or use it in a
+    ``with`` statement as follow::
 
         with WavWriter(filename, 2, 44100) as writer:
             # use writer...
@@ -96,7 +98,9 @@ class WavWriter(base.Writer):
         already exists).
     :type filename: str
     :param channels: the number of channels of the signal.
+    :type channels: int
     :param samplerate: the sampling rate of the signal.
+    :type samplerate: int
     """
     def __init__(self, filename, channels, samplerate):
         self._writer = wave.open(filename, 'wb')
