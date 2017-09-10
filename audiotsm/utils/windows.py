@@ -1,10 +1,8 @@
 # -*- coding: utf-8 -*-
 
 """
-audiotsm.utils.windows
-~~~~~~~~~~~~~~~~~~~~~~
-
-This module contains window functions used for digital signal processing.
+The :mod:`audiotsm.utils.windows` module contains window functions used for
+digital signal processing.
 """
 
 import numpy as np
@@ -13,10 +11,10 @@ import numpy as np
 def apply(buffer, window):
     """Applies a window to a buffer.
 
-    :param buffer: a matrix of size (m, n), with m the number of channels and
-        n the length of the buffer, where the samples will be written.
+    :param buffer: a matrix of shape (``m``, ``n``), with ``m`` the number of
+        channels and ``n`` the length of the buffer.
     :type buffer: :class:`numpy.ndarray`
-    :param window: a :class:`numpy.ndarray` of shape (n,).
+    :param window: a :class:`numpy.ndarray` of shape (``n``,).
     """
     if window is None:
         return
@@ -34,7 +32,7 @@ def hanning(length):
 
     :param length: the number of points of the Hanning window
     :type length: :class:`int`
-    :return: the window as a :class:`numpy.ndarray`
+    :return: the window as a :class:`numpy.ndarray` of shape (``length``,).
     """
     if length <= 0:
         return np.zeros(0)
@@ -44,7 +42,14 @@ def hanning(length):
 
 
 def product(window1, window2):
-    """Returns the product of two windows."""
+    """Returns the product of two windows.
+
+    :param window1: a :class:`numpy.ndarray` of shape (``n``,) or ``None``.
+    :param window2: a :class:`numpy.ndarray` of shape (``n``,) or ``None``.
+    :returns: the product of the two windows. If one of the windows is equal to
+        ``None``, the other is returned, and if the two are equal to ``None``,
+        ``None`` is returned.
+    """
     if window1 is None:
         return window2
 

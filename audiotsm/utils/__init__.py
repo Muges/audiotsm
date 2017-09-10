@@ -1,11 +1,8 @@
 # -*- coding: utf-8 -*-
 
 """
-audiotsm.utils
-~~~~~~~~~~~~~~
-
-This module provides utility functions and classes used in the implementation
-of time-scale modification procedures.
+The :mod:`audiotsm.utils` module provides utility functions and classes used in
+the implementation of time-scale modification procedures.
 
 .. autoclass:: audiotsm.utils.CBuffer
     :members:

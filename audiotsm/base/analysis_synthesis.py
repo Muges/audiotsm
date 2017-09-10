@@ -1,11 +1,8 @@
 # -*- coding: utf-8 -*-
 
 """
-audiotsm.analysis_synthesis
-~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-This module provides a base classe for real-time analysis-synthesis based audio
-time-scale modification procedures.
+The :mod:`audiotsm.base.analysis_synthesis` module provides a base class for
+real-time analysis-synthesis based audio time-scale modification procedures.
 """
 
 import numpy as np
@@ -17,18 +14,19 @@ EPSILON = 0.0001
 
 
 class AnalysisSynthesisTSM(TSM):
-    """A base class for real-time analysis-synthesis based time-scale
-    modification (TSM) procedures.
+    """A :class:`audiotsm.base.tsm.TSM` for real-time analysis-synthesis based
+    time-scale modification procedures.
 
     The basic principle of an analysis-synthesis based TSM procedure is to
     first decompose the input signal into short overlapping frames, called the
     analysis frames. The frames have a fixed length ``frame_length``, and are
-    separated by a distance ``analysis_hop``, as illustrated below::
+    separated by ``analysis_hop`` samples, as illustrated below::
 
                  <--------frame_length--------><-analysis_hop->
        Frame 1:  [~~~~~~~~~~~~~~~~~~~~~~~~~~~~]
        Frame 2:                  [~~~~~~~~~~~~~~~~~~~~~~~~~~~~]
        Frame 3:                                  [~~~~~~~~~~~~~~~~~~~~~~~~~~~~]
+       ...
 
     It then relocates the frames on the time axis by changing the distance
     between them (to ``synthesis_hop``), as illustrated below::
@@ -37,6 +35,7 @@ class AnalysisSynthesisTSM(TSM):
        Frame 1:  [~~~~~~~~~~~~~~~~~~~~~~~~~~~~]
        Frame 2:                         [~~~~~~~~~~~~~~~~~~~~~~~~~~~~]
        Frame 3:                                               [~~~~~~~~~~~~~~~~~~~~~~~~~~~~]
+       ...
 
     This changes the speed of the signal by the ratio ``analysis_hop /
     synthesis_hop`` (for example, if the ``synthesis_hop`` is twice the
@@ -52,6 +51,12 @@ class AnalysisSynthesisTSM(TSM):
     and the ``synthesis_window``) can be applied to the analysis frames and the
     synthesis frames in order to smooth the signal.
 
+    Some TSM procedures (e.g. WSOLA-like methods) may need to have access to
+    some samples preceeding or following an analysis frame to generate the
+    synthesis frame. The `delta_before` and `delta_after` parameters allow to
+    specify the numbers of samples needed before and after the analysis frame,
+    so that they are available to the ``converter``.
+
     For more details on Time-Scale Modification procedures, I recommend reading
     "`A Review of Time-Scale Modification of Music Signals`_" by Jonathan
     Driedger and Meinard Müller.
@@ -62,14 +67,10 @@ class AnalysisSynthesisTSM(TSM):
     :param converter: an object that implements the conversion of the analysis
         frames into synthesis frames.
     :type converter: :class:`Converter`
-    :param channels: the number of channels of the audio signal.
+    :param channels: the number of channels of the input signal.
     :type channels: int
     :param frame_length: the length of the frames.
     :type frame_length: int
-    :param speed: the speed ratio by which the speed of the signal will be
-        multiplied (for example, 0.5 means the output will be half as fast as
-        the input).
-    :type speed: float
     :param analysis_hop: the number of samples between two consecutive analysis
         frames.
     :type analysis_hop: int
@@ -240,22 +241,32 @@ class AnalysisSynthesisTSM(TSM):
 
 
 class Converter(object):
-    """An base class for objects implementing the conversion of analysis frames
+    """A base class for objects implementing the conversion of analysis frames
     into synthesis frames."""
-    def convert_frame(self, analysis_frame):
-        """Converts an analysis frame into a synthesis frame.
-
-        :param analysis_frame: an analysis frame.
-        :type analysis_frame: :class:`numpy.ndarray`
-        :returns: a synthesis frame represented as a :class:`numpy.ndarray`
-        """
-        raise NotImplementedError
 
     def clear(self):
         """Clears the state of the Converter, making it ready to be used on
         another signal (or another part of a signal). It is called by the
-        :func:`AnalysisSynthesisTSM.flush` and
-        :func:`AnalysisSynthesisTSM.clear` methods, as well as the constructor
-        of :class:`AnalysisSynthesisTSM`."""
+        :func:`~audiotsm.base.tsm.TSM.clear` method and the constructor of
+        :class:`AnalysisSynthesisTSM`."""
         # pylint: disable=no-self-use
         return
+
+    def convert_frame(self, analysis_frame):
+        """Converts an analysis frame into a synthesis frame.
+
+        :param analysis_frame: a matrix of shape (``m``, ``delta_before +
+            frame_length + delta_after``), with ``m`` the number of channels,
+            containing the analysis frame and some samples before and after
+            (as specified by the ``delta_before`` and ``delta_after``
+            parameters of the :class:`AnalysisSynthesisTSM` calling the
+            :class:`Converter`).
+
+            ``analysis_frame[:, delta_before:-delta_after]`` contains the
+            actual analysis frame (without the samples preceeding and following
+            it).
+        :type analysis_frame: :class:`numpy.ndarray`
+        :returns: a synthesis frame represented as a :class:`numpy.ndarray` of
+            shape (``m``, ``frame_length``), with ``m`` the number of channels.
+        """
+        raise NotImplementedError

@@ -1,21 +1,18 @@
 # -*- coding: utf-8 -*-
 
 """
-audiotsm.normalizebuffer
-~~~~~~~~~~~~~~~~~~~~~~~~
-
-This module implements a mono-channel circular buffer used to normalize audio
-buffers.
+The :mod:`audiotsm.normalizebuffer` module implements a mono-channel circular
+buffer used to normalize audio buffers.
 """
 
 import numpy as np
 
 
 class NormalizeBuffer(object):
-    """A NormalizeBuffer is a mono-channel circular buffer, used to normalize
-    audio buffers.
+    """A :class:`NormalizeBuffer` is a mono-channel circular buffer, used to
+    normalize audio buffers.
 
-    :param length: the length of the NormalizeBuffer.
+    :param length: the length of the :class:`NormalizeBuffer`.
     :type length: int
     """
     def __init__(self, length):
@@ -27,17 +24,13 @@ class NormalizeBuffer(object):
         return "NormalizeBuffer(offset={}, length={}, data=\n{})".format(
             self._offset, self._length, repr(self.to_array()))
 
-    @property
-    def length(self):
-        """The length of the CBuffer."""
-        return self._length
-
     def add(self, window):
-        """Adds a window element-wise to the NormalizeBuffer.
+        """Adds a window element-wise to the :class:`NormalizeBuffer`.
 
-        :param window: an array of dimension 1.
+        :param window: an array of shape (``n``,).
         :type window: :class:`numpy.ndarray`
-        :raises ValueError: if the window is larger than the buffer.
+        :raises ValueError: if the window is larger than the buffer (``n >
+            self.length``).
         """
         n = len(window)
         if n > self._length:
@@ -55,10 +48,15 @@ class NormalizeBuffer(object):
             self._data[start:] += window[:self._length - start]
             self._data[:end] += window[self._length - start:]
 
-    def remove(self, n):
-        """Removes the first n values of the NormalizeBuffer.
+    @property
+    def length(self):
+        """The length of the CBuffer."""
+        return self._length
 
-        :param n: the number of samples to remove.
+    def remove(self, n):
+        """Removes the first ``n`` values of the :class:`NormalizeBuffer`.
+
+        :param n: the number of values to remove.
         :type n: int
         """
         if n >= self._length:
@@ -82,7 +80,8 @@ class NormalizeBuffer(object):
 
     def to_array(self, start=0, end=None):
         """Returns an array containing the same data as the
-        NormalizeBuffer[start:end].
+        :class:`NormalizeBuffer`, from index ``start`` (included) to index
+        ``end`` (exluded).
 
         :returns: :class:`numpy.ndarray`
         """

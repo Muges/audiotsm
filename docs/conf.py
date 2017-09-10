@@ -84,6 +84,18 @@ language = 'en'
 # This patterns also effect to html_static_path and html_extra_path
 exclude_patterns = ['_build', 'Thumbs.db', '.DS_Store']
 
+# If true, Sphinx will warn about all references where the target cannot be
+# found.
+nitpicky = True
+
+# A list of (type, target) tuples (by default empty) that should be ignored
+# when generating warnings in “nitpicky mode”. Note that type should include
+# the domain name if present. Example entries would be ('py:func', 'int') or
+# ('envvar', 'LD_LIBRARY_PATH').
+nitpick_ignore = [
+    ('py:obj', 'optional')
+]
+
 # The name of the Pygments (syntax highlighting) style to use.
 pygments_style = 'sphinx'
 
@@ -91,6 +103,7 @@ pygments_style = 'sphinx'
 todo_include_todos = True
 
 intersphinx_mapping = {
+    'python': ('https://docs.python.org/3.6', None),
     'numpy': ('https://docs.scipy.org/doc/numpy/', None),
     'sounddevice':
         ('https://python-sounddevice.readthedocs.io/en/latest/', None)
