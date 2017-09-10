@@ -1,21 +1,32 @@
 Readers and Writers
 ===================
 
-.. automodule:: audiotsm.io.base
-    :members:
-    :undoc-members:
+.. automodule:: audiotsm.io
+
+Numpy arrays
+------------
 
 .. automodule:: audiotsm.io.array
     :members:
-    :undoc-members:
     :show-inheritance:
+
+Wav files
+---------
 
 .. automodule:: audiotsm.io.wav
     :members:
-    :undoc-members:
     :show-inheritance:
+
+Play in real-time
+-----------------
 
 .. automodule:: audiotsm.io.stream
     :members:
-    :undoc-members:
     :show-inheritance:
+
+Implementing your own
+---------------------
+
+.. automodule:: audiotsm.io.base
+    :members:
+    :undoc-members:
