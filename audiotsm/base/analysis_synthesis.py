@@ -223,9 +223,6 @@ class AnalysisSynthesisTSM(TSM):
 
         return n
 
-    def remaining_input_space(self):
-        return self._skip_input_samples + self._in_buffer.remaining_length
-
     def set_speed(self, speed):
         self._analysis_hop = int(self._synthesis_hop * speed)
 
