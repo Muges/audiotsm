@@ -17,10 +17,11 @@ from . import base
 
 class StreamWriter(base.Writer):
     """A Writer allowing to play the output of a TSM object directly."""
-    def __init__(self, channels, samplerate):
+    def __init__(self, channels, samplerate, **attrs):
         self._channels = channels
 
-        self._stream = OutputStream(samplerate=samplerate, channels=channels)
+        self._stream = OutputStream(samplerate=samplerate, channels=channels,
+                                    **attrs)
         self._stream.start()
 
     @property
