@@ -14,27 +14,49 @@ changing its pitch.
 :license: MIT, see LICENSE for more details.
 """
 
-import ast
+import os
 import re
+import sys
 from setuptools import setup, find_packages
+from setuptools.command.test import test as TestCommand
 try:
     from sphinx.setup_command import BuildDoc
 except ImportError:
     BuildDoc = None
 
 
-_version_re = re.compile(r'__version__\s+=\s+(.*)')
+def find_version():
+    """Read the package's version from __init__.py"""
+    version_filename = os.path.abspath("audiotsm/__init__.py")
+    with open(version_filename) as fileobj:
+        version_content = fileobj.read()
+    version_match = re.search(r"^__version__ = ['\"]([^'\"]*)['\"]",
+                              version_content, re.M)
+    if version_match:
+        return version_match.group(1)
+    raise RuntimeError("Unable to find version string.")
 
-with open('audiotsm/__init__.py', 'rb') as f:
-    version = str(ast.literal_eval(_version_re.search(
-        f.read().decode('utf-8')).group(1)))
+
+class PyTest(TestCommand):
+    def finalize_options(self):
+        TestCommand.finalize_options(self)
+        self.test_args = ['--cov=audiotsm']
+        self.test_suite = True
+
+    def run_tests(self):
+        import pytest
+
+        errcode = pytest.main(self.test_args)
+        sys.exit(errcode)
+
 
 with open('README.rst', 'r') as f:
     long_description = f.read()
 
+
 setup(
     name="audiotsm",
-    version=version,
+    version=find_version(),
     description="A real-time audio time-scale modification library",
     long_description=long_description,
     license="MIT",
@@ -47,14 +69,10 @@ setup(
     install_requires=[
         "numpy",
     ],
-    setup_requires=[
-        "pytest-runner",
-    ],
     tests_require=[
         "pytest",
-        "pytest-pylint",
-        "pytest-flake8",
         "pytest-coverage",
+        "sounddevice",
     ],
     extras_require={
         "doc": ["sphinx", "sphinx_rtd_theme"],
@@ -62,7 +80,8 @@ setup(
     },
 
     cmdclass={
-        'doc': BuildDoc
+        'doc': BuildDoc,
+        'test': PyTest,
     },
 
     classifiers=[
