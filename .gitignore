@@ -1,6 +1,7 @@
 .cache
 .coverage
 .eggs
+.tox
 dist
 build
 *.egg-info

@@ -1,5 +1,6 @@
-sounddevice
-pytest-pylint
-pytest-flake8
-pytest-coverage
 check-manifest
+flake8
+pylint
+pytest
+pytest-coverage
+sounddevice

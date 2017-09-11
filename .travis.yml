@@ -2,10 +2,5 @@ language: python
 python:
   - "3.5"
   - "3.6"
-install:
-  - pip install -r requirements.txt
-  - pip install -r requirements-tests.txt
-  - pip install -e .
-script:
-  - check-manifest
-  - pytest
+install: pip install tox-travis
+script: tox
