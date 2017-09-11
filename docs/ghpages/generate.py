@@ -91,7 +91,11 @@ def generate_css():
     """Generate css stylesheet."""
     css = sass.compile(filename=CSS_FILE)
 
-    filename = os.path.join(DESTINATION_DIR, "css", "audiotsm.css")
+    css_dir = os.path.join(DESTINATION_DIR, "css")
+    if not os.path.isdir(css_dir):
+        os.makedirs(css_dir)
+
+    filename = os.path.join(css_dir, "audiotsm.css")
     with open(filename, 'w') as fileobj:
         fileobj.write(css)
 
