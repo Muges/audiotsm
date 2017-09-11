@@ -1,0 +1,48 @@
+.navbar {
+    border-top: .3rem solid $primary-color;
+}
+.navbar-section {
+    margin: .5rem;
+}
+
+.icon-btn > *, .player > * {
+    vertical-align: middle;
+}
+
+.content-width {
+    margin-left: auto;
+    margin-right: auto;
+    width: 80%;
+}
+
+.content {
+    margin-top: 3rem;
+    margin-bottom: 3rem;
+}
+
+.examples {
+    margin-top: 1rem;
+    margin-bottom: 2.5rem;
+    overflow-x: auto;
+
+    table {
+        white-space: nowrap;
+    }
+}
+
+.player {
+    display: none;
+    padding: .2rem;
+
+    position: sticky;
+    bottom: 0;
+
+    text-align: center;
+    background-color: $secondary-color;
+}
+
+footer {
+    padding-top: 2rem;
+    padding-bottom: 2rem;
+    background-color: $bg-color;
+}

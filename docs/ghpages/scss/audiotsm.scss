@@ -1,0 +1,22 @@
+/*! Spectre.css | MIT License | github.com/picturepan2/spectre */
+// Core variables and mixins
+@import "spectre/variables";
+@import "spectre/mixins";
+
+// Reset and dependencies
+@import "spectre/normalize";
+@import "spectre/base";
+
+// Core classes
+@import "spectre/typography";
+@import "spectre/tables";
+@import "spectre/buttons";
+
+// Layout
+@import "spectre/navbar";
+
+// Utility classes
+@import "spectre/utilities/position";
+@import "spectre/utilities/text";
+
+@import "style";

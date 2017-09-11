@@ -1,0 +1,101 @@
+<!doctype html>
+<html>
+  <head>
+    <title>AudioTSM : Examples</title>
+    <meta charset="UTF-8"> 
+    <link rel="stylesheet" type="text/css" href="css/audiotsm.css">
+  </head>
+  <body>
+    <header class="navbar">
+      <section class="navbar-section">
+        <a href="index.html" class="btn btn-link text-bold">AudioTSM</a>
+        <a href="https://audiotsm.readthedocs.io/" class="btn btn-link">Documentation</a>
+      </section>
+      
+      <section class="navbar-section">
+        <a href="https://github.com/Muges/audiotsm" class="btn btn-primary icon-btn">
+          <img src="images/github.svg" />
+          <span>GitHub</span>
+        </a>
+      </section>
+    </header>
+
+    <div class="content content-width">
+      <h2>AudioTSM examples</h2>
+
+      <p>AudioTSM is a python library implementing various time-scale
+      modification procedures, i.e. procedures that change the speed of an
+      audio signal without changing its pitch. None of those methods are
+      perfect, and the quality of the results depends on the audio signal and
+      the parameters of the algorithm. This page gives an overview of the
+      result obtained for each method with various inputs and at various
+      speeds.</p>
+
+      <p>The <a href="#credits">credits</a> for the audio files listed below
+      are available at the end of this page.</p>
+    </div>
+    
+    <div class="content content-width">
+      {% for speed in speeds %}
+      <h3>Speed = {{ speed }}</h3>
+
+      <div class="examples">
+        <table class="table table-striped table-hover">
+          <thead>
+            <tr>
+              <th>Name</th>
+              <th>Original</th>
+              {% for _, method in methods %}
+              <th>{{ method }}</th>
+              {% endfor %}
+            </tr>
+          </thead>
+          <tbody>
+            {% for name, file in files[speed] | dictsort %}
+            <tr>
+              <td>{{ name }}</td>
+              <td>
+                <a href="{{ files.orig[name] }}" class="play-btn icon-btn btn-small">
+                  <img src="images/play.svg" />
+                  <span>Play</span>
+                </a>
+              </td>
+              {% for method, _ in methods %}
+              <td>
+                <a href="{{ file[method] }}" class="play-btn icon-btn btn-small">
+                  <img src="images/play.svg" />
+                  <span>Play</span>
+                </a>
+              </td>
+              {% endfor %}
+            </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      </div>
+      {% endfor %}
+
+    </div>
+
+      <div class="player">
+        <audio controls id="player">
+          <source id="playerSource" src=""></source>
+        </audio> 
+      </div>
+
+    <div class="content content-width">
+      <h3 id="credits">Credits</h3>
+
+      {{ credits }}
+
+    </div>
+
+    <script src="js/examples.js"></script>
+
+    <footer>
+      <div class="content-width">
+        Designed with <a href="https://picturepan2.github.io/spectre/index.html">Spectre.css</a> and <a href="https://feathericons.com/">Feather</a>.
+      </div>
+    </footer>
+  </body>
+</html>

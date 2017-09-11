@@ -9,7 +9,7 @@ brad-sucks
 
 tsmtoolbox
    The tsmtoolbox directory contains audio files taken from the `TSMToolbox
-   examples`, a MATLAB TSM library. The audio files should be short enough to
+   examples`_, a MATLAB TSM library. The audio files should be short enough to
    fall under fair use.
 
 .. _Bernd Krueger: http://www.piano-midi.de/

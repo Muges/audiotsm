@@ -1,5 +1,8 @@
 check-manifest
+docutils
 flake8
+jinja2
+libsass
 pylint
 pytest
 pytest-coverage

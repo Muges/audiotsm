@@ -12,7 +12,7 @@ from audiotsm import ola, wsola
 from audiotsm.io.wav import WavReader, WavWriter
 from audiotsm.io.array import ArrayWriter
 
-EXAMPLES_DIR = os.path.join("build", "examples")
+EXAMPLES_DIR = os.path.join("build", "ghpages", "examples")
 
 
 def create_tsm(name, channels, speed):
