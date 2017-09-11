@@ -18,6 +18,9 @@ Documentation:
 Source code repository and issue tracker:
    https://github.com/Muges/audiotsm/
 
+Python Package Index:
+    https://pypi.python.org/pypi/audiotsm/
+
 License:
    MIT -- see the file ``LICENSE`` for details.
 
@@ -26,16 +29,14 @@ Installation
 
 Audiotsm should work with python 2.7 and python 3.4+.
 
-For now you should probably install audiotsm directly from the github
-repository using pip::
+You can install the latest version of audiotsm with pip::
 
-    pip install git+https://github.com/Muges/audiotsm.git
-
-A package should be available on PyPI soon.
-
+    pip install audiotsm
 
 You may also need to install the sounddevice_ library in order to run the
-examples or to use a ``StreamWriter``.
+examples or to use a ``StreamWriter``::
+
+    pip install sounddevice
 
 .. _sounddevice: https://github.com/spatialaudio/python-sounddevice/
 

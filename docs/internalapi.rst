@@ -2,7 +2,7 @@ Internal API
 ============
 
 Analysis-Synthesis based TSM procedures
---------------------------------------
+---------------------------------------
 
 .. automodule:: audiotsm.base.analysis_synthesis
     :members:
