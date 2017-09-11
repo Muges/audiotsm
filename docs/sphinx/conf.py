@@ -19,7 +19,7 @@ import re
 
 def find_version():
     """Read the package's version from __init__.py"""
-    version_filename = os.path.abspath("../audiotsm/__init__.py")
+    version_filename = os.path.abspath("../../audiotsm/__init__.py")
     with open(version_filename) as fileobj:
         version_content = fileobj.read()
     version_match = re.search(r"^__version__ = ['\"]([^'\"]*)['\"]",
