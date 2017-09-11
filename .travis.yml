@@ -6,3 +6,11 @@ python:
   - "3.6"
 install: pip install tox-travis
 script: tox
+
+deploy:
+  provider: pages
+  skip_cleanup: true
+  github_token: $GITHUB_TOKEN
+  on:
+    branch: master
+  local_dir: build/ghpages
