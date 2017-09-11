@@ -7,6 +7,8 @@ include docs/Makefile docs/make.bat
 recursive-include examples *.py
 
 recursive-include tests *.py
+recursive-include tests/integration/data *.wav
+recursive-include tests/integration/data *.rst
 include tests/pylintrc
 
 prune docs/_build
