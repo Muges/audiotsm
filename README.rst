@@ -24,6 +24,8 @@ License:
 Installation
 ------------
 
+Audiotsm should work with python 2.7 and python 3.4+.
+
 For now you should probably install audiotsm directly from the github
 repository using pip::
 
