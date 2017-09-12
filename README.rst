@@ -15,6 +15,9 @@ changing its pitch.
 Documentation:
    https://audiotsm.readthedocs.io/
 
+Examples:
+    https://muges.github.io/audiotsm/
+
 Source code repository and issue tracker:
    https://github.com/Muges/audiotsm/
 
@@ -48,6 +51,12 @@ The audiotsm package implements several time-scale modification procedures:
 - OLA (Overlap-Add), which should only be used for percussive audio signals;
 - WSOLA (Waveform Similarity-based Overlap-Add), an amelioration of the OLA
   procedure which should give good results on most inputs.
+
+If you are unsure which procedure to choose, the WSOLA should sound best in
+most cases. You can listen to the output of the different procedures on various
+audio files and at various speeds on the `examples page`_.
+
+.. _examples page: https://muges.github.io/audiotsm/
 
 Below is a basic example showing how to reduce the speed of a wav file by half
 using the WSOLA procedure::
