@@ -1,3 +1,7 @@
+h1, h2, h3 {
+    margin-bottom: 1rem;
+}
+
 .navbar {
     border-top: .3rem solid $primary-color;
 }
@@ -13,6 +17,7 @@
     margin-left: auto;
     margin-right: auto;
     width: 80%;
+    max-width: 50rem;
 }
 
 .content {
@@ -21,10 +26,7 @@
 }
 
 .examples {
-    margin-top: 1rem;
-    margin-bottom: 2.5rem;
     overflow-x: auto;
-
     table {
         white-space: nowrap;
     }
