@@ -10,4 +10,5 @@
 
    tsm
    io
+   gstreamer
    internalapi

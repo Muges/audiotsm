@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 """
-The :mod:`~audiotsm.gstreamer.wsola` module implements an audio filter
+The :mod:`audiotsm.gstreamer.wsola` module implements an audio filter
 allowing to use the WSOLA procedure with gstreamer.
 """
 
@@ -35,5 +35,5 @@ WSOLA.register()
 # following commands (this does not seem to work):
 # export GST_PLUGIN_PATH=$PWD/audiotsm/gstreamer/
 # gst-launch-1.0 fakesrc num-buffers=10 ! audiotsm-wsola ! fakesink
-WSOLA_TYPE = GObject.type_register(WSOLA)
-__gstelementfactory__ = (WSOLA.plugin_name, Gst.Rank.NONE, WSOLA_TYPE)
+_WSOLA_TYPE = GObject.type_register(WSOLA)
+__gstelementfactory__ = (WSOLA.plugin_name, Gst.Rank.NONE, _WSOLA_TYPE)

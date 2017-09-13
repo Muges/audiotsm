@@ -19,3 +19,9 @@ Window functions
     :members:
     :undoc-members:
     :show-inheritance:
+
+Gstreamer filters
+-----------------
+
+.. automodule:: audiotsm.gstreamer.base
+    :members:

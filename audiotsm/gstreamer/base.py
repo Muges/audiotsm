@@ -22,11 +22,11 @@ Gst.init(sys.argv)
 
 def audioformatinfo_to_dtype(info):
     """Return the data type corresponding to a
-    :class:`GstAudio.AudioFormatInfo` object.
+    ``GstAudio.AudioFormatInfo`` object.
 
-    :param info: a :class:`GstAudio.AudioFormatInfo`.
+    :param info: a ``GstAudio.AudioFormatInfo``.
     :returns: the corresponding data type, to be used in :mod:`numpy`
-    functions.
+        functions.
     """
     endianness = '<' if info.endianness == GLib.LITTLE_ENDIAN else '>'
 
@@ -86,7 +86,7 @@ class GstTSM(GstAudio.AudioFilter):
         """Register the plugin.
 
         Register the plugin to make it possible to instantiate it with
-        :func:`Gst.ElementFactory.make."""
+        ``Gst.ElementFactory.make``."""
         Gst.Plugin.register_static(
             Gst.VERSION_MAJOR, Gst.VERSION_MINOR, cls.plugin_name,
             cls.get_metadata('description'), cls.plugin_init, __version__,
@@ -159,8 +159,8 @@ class GstTSM(GstAudio.AudioFilter):
         :class:`~audiotsm.base.tsm.TSM` object and write the output to
         ``out_buffer``.
 
-        :param in_buffer: a :class:`Gst.Buffer` containing the input data.
-        :param out_buffer: a :class:`Gst.Buffer` where the output data will be
+        :param in_buffer: a ``Gst.Buffer`` containing the input data.
+        :param out_buffer: a ``Gst.Buffer`` where the output data will be
             written.
         """
         # There is a bug that increases the refcount of out_buffer, making it
