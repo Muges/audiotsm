@@ -1,6 +1,6 @@
 check-manifest
 docutils
-flake8
+pycodestyle
 jinja2
 libsass
 pylint
