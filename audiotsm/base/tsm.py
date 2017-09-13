@@ -50,23 +50,26 @@ class TSM(object):
         """
         raise NotImplementedError
 
-    def run(self, reader, writer):
+    def run(self, reader, writer, flush=True):
         """Runs the TSM procedure on the content of ``reader`` and writes the
         output to ``writer``.
 
         :param reader: a :class:`audiotsm.io.base.Reader`.
         :param writer: a :class:`audiotsm.io.base.Writer`.
+        :param flush: ``True`` if there is no more data to process.
+        :type flush: bool, optional
         """
         finished = False
         while not (finished and reader.empty):
             self.read_from(reader)
             _, finished = self.write_to(writer)
 
-        finished = False
-        while not finished:
-            _, finished = self.flush_to(writer)
+        if flush:
+            finished = False
+            while not finished:
+                _, finished = self.flush_to(writer)
 
-        self.clear()
+            self.clear()
 
     def set_speed(self, speed):
         """Sets the speed ratio.
