@@ -47,6 +47,8 @@ class MainWindow(Gtk.Window):
         if not tsm:
             raise RuntimeError('unable to load audiotsm-wsola plugin')
 
+        tsm.set_property('speed', 0.5)
+
         self.player.add(source)
         self.player.add(decoder)
         self.player.add(conv)

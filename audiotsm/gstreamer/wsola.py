@@ -24,9 +24,39 @@ class WSOLA(GstTSM):
     )
 
     plugin_name = "audiotsm-wsola"
+    """The plugin name, to be used in ``Gst.ElementFactory.make``."""
+
+    frame_length = GObject.Property(type=int, default=-1,
+                                    flags=GObject.ParamFlags.WRITABLE)
+    """The length of the frames.
+
+    This is a write-only attribute, that will only take effect the next time
+    the audio filter is setup (usually on the next song)."""
+
+    synthesis_hop = GObject.Property(type=int, default=-1,
+                                     flags=GObject.ParamFlags.WRITABLE)
+    """The number of samples between two consecutive synthesis frames.
+
+    This is a write-only attribute, that will only take effect the next time
+    the audio filter is setup (usually on the next song)."""
+
+    tolerance = GObject.Property(type=int, default=-1,
+                                 flags=GObject.ParamFlags.WRITABLE)
+    """The maximum number of samples that the analysis frame can be shifted.
+
+    This is a write-only attribute, that will only take effect the next time
+    the audio filter is setup (usually on the next song)."""
 
     def create_tsm(self, channels, speed):
-        return wsola(channels, speed)
+        parameters = {}
+        if self.frame_length > 0:
+            parameters['frame_length'] = self.frame_length
+        if self.synthesis_hop > 0:
+            parameters['synthesis_hop'] = self.synthesis_hop
+        if self.tolerance >= 0:
+            parameters['tolerance'] = self.tolerance
+
+        return wsola(channels, speed, **parameters)
 
 
 WSOLA.register()

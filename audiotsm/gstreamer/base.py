@@ -74,6 +74,31 @@ class GstTSM(GstAudio.AudioFilter):
                                             Gst.PadPresence.ALWAYS,
                                             Gst.Caps.new_any()))
 
+    def __init__(self):
+        super().__init__()
+
+        self._channels = 0
+        self._samplerate = 0
+        self._dtype = ''
+
+        self._tsm = None
+        self._position = 0
+        self._speed = 1.0
+
+    @GObject.Property(type=float)
+    def speed(self):
+        """The speed ratio by which the speed of the signal will be multiplied
+        (for example, if ``speed`` is 0.5, the output signal will be half as
+        fast as the input signal)."""
+        return self._speed
+
+    @speed.setter
+    def set_speed(self, speed):
+        """Set the speed ratio."""
+        if self._tsm is not None:
+            self._tsm.set_speed(speed)
+        self._speed = speed
+
     @classmethod
     def plugin_init(cls, plugin):
         """Initialize the plugin."""
@@ -100,13 +125,11 @@ class GstTSM(GstAudio.AudioFilter):
             raise TypeError(
                 "audiotsm.gstreamer only supports interleaved audio.")
 
-        # pylint: disable=attribute-defined-outside-init
-        self._audioinfo = audioinfo
         self._channels = audioinfo.channels
         self._samplerate = audioinfo.rate
         self._dtype = audioformatinfo_to_dtype(audioinfo.finfo)
 
-        self._tsm = self.create_tsm(audioinfo.channels, speed=1.5)
+        self._tsm = self.create_tsm(audioinfo.channels, self._speed)
         self._position = 0
         return True
 
