@@ -1,5 +1,5 @@
-Gstreamer plugin
-================
+Gstreamer plugins
+=================
 
 .. automodule:: audiotsm.gstreamer
 
