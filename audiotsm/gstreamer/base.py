@@ -10,19 +10,23 @@ import numpy as np
 import gi
 gi.require_version('Gst', '1.0')
 gi.require_version('GstAudio', '1.0')
+gi.require_version('GstBase', '1.0')
 
 # pylint: disable=wrong-import-position
-from gi.repository import GObject, GLib, Gst, GstAudio
+from gi.repository import GObject, GLib, Gst, GstAudio, GstBase
 from audiotsm import __version__
 from audiotsm.io.array import ArrayReader, ArrayWriter
 # pylint: enable=wrong-import-position
 
 Gst.init(sys.argv)
 
+CAPS = Gst.Caps.from_string(
+    "audio/x-raw,format=S16LE,layout=interleaved")
+
 
 def audioformatinfo_to_dtype(info):
-    """Return the data type corresponding to a
-    ``GstAudio.AudioFormatInfo`` object.
+    """Return the data type corresponding to a ``GstAudio.AudioFormatInfo``
+    object.
 
     :param info: a ``GstAudio.AudioFormatInfo``.
     :returns: the corresponding data type, to be used in :mod:`numpy`
@@ -46,7 +50,7 @@ def audioformatinfo_to_dtype(info):
     return '{}{}{}'.format(endianness, _type, samplewidth)
 
 
-class GstTSM(GstAudio.AudioFilter):
+class GstTSM(GstBase.BaseTransform):
     """Gstreamer TSM plugin.
 
     Subclasses should implement the :func:`~GstTSM.create_tsm` method and
@@ -68,11 +72,11 @@ class GstTSM(GstAudio.AudioFilter):
     __gsttemplates__ = (Gst.PadTemplate.new("src",
                                             Gst.PadDirection.SRC,
                                             Gst.PadPresence.ALWAYS,
-                                            Gst.Caps.new_any()),
+                                            CAPS),
                         Gst.PadTemplate.new("sink",
                                             Gst.PadDirection.SINK,
                                             Gst.PadPresence.ALWAYS,
-                                            Gst.Caps.new_any()))
+                                            CAPS))
 
     def __init__(self):
         super().__init__()
@@ -117,22 +121,6 @@ class GstTSM(GstAudio.AudioFilter):
             cls.get_metadata('description'), cls.plugin_init, __version__,
             'MIT/X11', 'audiotsm', 'audiotsm', '')
 
-    def do_setup(self, audioinfo):
-        """Setup the audio filter.
-
-        This method is called once when the playback starts."""
-        if audioinfo.layout != GstAudio.AudioLayout.INTERLEAVED:
-            raise TypeError(
-                "audiotsm.gstreamer only supports interleaved audio.")
-
-        self._channels = audioinfo.channels
-        self._samplerate = audioinfo.rate
-        self._dtype = audioformatinfo_to_dtype(audioinfo.finfo)
-
-        self._tsm = self.create_tsm(audioinfo.channels, self._speed)
-        self._position = 0
-        return True
-
     def _gstbuffer_to_ndarray(self, gstbuffer):
         """Return the data contained in ``gstbuffer`` as a
         :class:`numpy.ndarray`.
@@ -176,6 +164,66 @@ class GstTSM(GstAudio.AudioFilter):
 
         duration = (length * 1000000000) // self._samplerate
         gstbuffer.duration = duration
+
+    def do_sink_event(self, event):
+        """Sink pad event handler."""
+        if event.type == Gst.EventType.CAPS:
+            # CAPS event, used to negotiate the format with the "upstream"
+            # gstreamer element.
+            caps = event.parse_caps()
+            structure = caps.get_structure(0)
+
+            # Ensure that the layout is interleaved
+            layout = structure.get_string('layout')
+            if layout != 'interleaved':
+                # Returns False if we were unable to agree on a format.
+                return False
+
+            # Get number of channels
+            success, self._channels = structure.get_int('channels')
+            if not success:
+                # Returns False if we were unable to agree on a format.
+                return False
+
+            # Get samplerate
+            success, self._samplerate = structure.get_int('rate')
+            if not success:
+                # Returns False if we were unable to agree on a format.
+                return False
+
+            # Get and parse samples format
+            samples_format = structure.get_string('format')
+            if samples_format is None:
+                # Returns False if we were unable to agree on a format.
+                return False
+
+            info = GstAudio.AudioFormat.get_info(
+                GstAudio.AudioFormat.from_string(samples_format)
+            )
+            self._dtype = audioformatinfo_to_dtype(info)
+
+            # Create the TSM object
+            self._tsm = self.create_tsm(self._channels, self._speed)
+
+            self._position = 0
+
+        if event.type == Gst.EventType.EOS:
+            # Flush the TSM object at the end of the stream
+            writer = ArrayWriter(self._channels)
+            self._tsm.flush_to(writer)
+
+            # Write the output to a Gst.Buffer
+            out_buffer = Gst.Buffer.new()
+            self._ndarray_to_gstbuffer(out_buffer, writer.data)
+
+            out_buffer.pts = self._position
+            self._position += out_buffer.duration
+
+            # Send the buffer downstream
+            self.srcpad.push(out_buffer)
+
+        # Propagate the event downstream
+        return self.srcpad.push_event(event)
 
     def do_transform(self, in_buffer, out_buffer):
         """Run the data of ``in_buffer`` through the
