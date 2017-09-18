@@ -15,7 +15,7 @@ follow::
     tsm = Gst.ElementFactory.make("audiotsm-wsola")
 
 You should then create a gstreamer pipeline using the audio filter you created.
-See ``examples/audiotsmgtk_basic.py`` for an example of pipeline.
+See ``examples/audiotsmcli_gst.py`` for an example of pipeline.
 
 The audio filters work in the same manner as the ``scaletempo`` gstreamer
 plugin. You can change the playback rate by sending a seek event to the
