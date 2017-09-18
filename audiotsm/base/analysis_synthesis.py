@@ -165,6 +165,14 @@ class AnalysisSynthesisTSM(TSM):
 
         return n, False
 
+    def get_max_output_length(self, input_length):
+        input_length -= self._skip_input_samples
+        if input_length <= 0:
+            return 0
+
+        n_frames = input_length // self._analysis_hop + 1
+        return n_frames * self._synthesis_hop
+
     def _process_frame(self):
         """Read an analysis frame from the input buffer, process it, and write
         the result to the output buffer."""

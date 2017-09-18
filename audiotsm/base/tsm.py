@@ -41,6 +41,17 @@ class TSM(object):
         """
         raise NotImplementedError
 
+    def get_max_output_length(self, input_length):
+        """Returns the maximum number of samples that will be written to the
+        output given the numver of samples of the input.
+
+        :param input_length: the number of samples of the input.
+        :type input_length: int
+        :returns: the maximum number of samples that will be written to the
+            output.
+        """
+        raise NotImplementedError
+
     def read_from(self, reader):
         """Reads as many samples as possible from ``reader``, processes them,
         and returns the number of samples that were read.
