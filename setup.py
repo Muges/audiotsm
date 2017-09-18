@@ -83,7 +83,8 @@ setup(
     ],
     extras_require={
         "doc": ["sphinx", "sphinx_rtd_theme"],
-        "StreamWriter": ["sounddevice"]
+        "stream": ["sounddevice"],
+        "gstreamer": ["gstbasetransform"]
     },
 
     cmdclass={

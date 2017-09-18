@@ -10,12 +10,12 @@ import numpy as np
 import gi
 gi.require_version('Gst', '1.0')
 gi.require_version('GstAudio', '1.0')
-gi.require_version('GstBase', '1.0')
 
 # pylint: disable=wrong-import-position
-from gi.repository import GObject, GLib, Gst, GstAudio, GstBase
+from gi.repository import GObject, GLib, Gst, GstAudio
 from audiotsm import __version__
 from audiotsm.io.array import ArrayReader, ArrayWriter
+from gstbasetransform import BaseTransform
 # pylint: enable=wrong-import-position
 
 Gst.init(sys.argv)
@@ -50,7 +50,7 @@ def audioformatinfo_to_dtype(info):
     return '{}{}{}'.format(endianness, _type, samplewidth)
 
 
-class GstTSM(GstBase.BaseTransform):
+class GstTSM(BaseTransform):
     """Gstreamer TSM plugin.
 
     Subclasses should implement the :func:`~GstTSM.create_tsm` method and
@@ -68,6 +68,7 @@ class GstTSM(GstBase.BaseTransform):
     .. _gst_element_class_set_metadata:
         https://gstreamer.freedesktop.org/data/doc/gstreamer/head/gstreamer/html/GstElement.html#gst-element-class-set-metadata
     """  # noqa: E501
+    # pylint: disable=no-member
 
     __gsttemplates__ = (Gst.PadTemplate.new("src",
                                             Gst.PadDirection.SRC,
@@ -83,6 +84,7 @@ class GstTSM(GstBase.BaseTransform):
 
         self._channels = 0
         self._samplerate = 0
+        self._bps = 0  # bytes per sample
         self._dtype = ''
 
         self._tsm = None
@@ -152,16 +154,20 @@ class GstTSM(GstBase.BaseTransform):
         size = len(data)
 
         # Copy as many bytes as possible to the buffer directly
-        n = min(len(data), gstbuffer.get_size())
+        n = min(size, gstbuffer.get_size())
         if n > 0:
             gstbuffer.fill(0, data[:n])
+
+        if size > gstbuffer.get_size():
+            Gst.warning('the output buffer is too small, allocating memory')
+
+            # Allocate memory for the rest of the data
+            # This may add noise to the audio signal
             data = data[n:]
+            mem = Gst.Memory.new_wrapped(0, data, len(data), 0, None, None)
+            gstbuffer.append_memory(mem)
 
-        # Allocate memory for the rest
-        mem = Gst.Memory.new_wrapped(0, data, len(data), 0, None, None)
-        gstbuffer.append_memory(mem)
         gstbuffer.set_size(size)
-
         duration = (length * 1000000000) // self._samplerate
         gstbuffer.duration = duration
 
@@ -201,6 +207,8 @@ class GstTSM(GstBase.BaseTransform):
                 GstAudio.AudioFormat.from_string(samples_format)
             )
             self._dtype = audioformatinfo_to_dtype(info)
+
+            self._bps = self._channels * info.width // 8
 
             # Create the TSM object
             self._tsm = self.create_tsm(self._channels, self._speed)
@@ -256,6 +264,14 @@ class GstTSM(GstBase.BaseTransform):
         out_buffer.mini_object.refcount = refcount
 
         return Gst.FlowReturn.OK
+
+    def do_transform_size(self, direction, caps, size, othercaps):
+        """Returns the size of the output buffer given the size of the input
+        buffer."""
+        input_length = size // self._bps
+        output_length = self._tsm.get_max_output_length(input_length)
+        output_size = output_length * self._bps
+        return True, output_size
 
     def create_tsm(self, channels, speed):
         """Returns the :class:`~audiotsm.base.tsm.TSM` object used by the audio

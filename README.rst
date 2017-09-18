@@ -36,12 +36,22 @@ You can install the latest version of audiotsm with pip::
 
     pip install audiotsm
 
-You may also need to install the sounddevice_ library in order to run the
-examples or to use a ``StreamWriter``::
+If you want to use the gstreamer plugins, you should install PyGObject_ and
+python-gst_, and use the following command to install audiotsm::
 
-    pip install sounddevice
+    pip install audiotsm[gstreamer]
 
-.. _sounddevice: https://github.com/spatialaudio/python-sounddevice/
+If you want to play the output of the TSM procedures in real time, or to use
+the examples, you should install audiotsm as follow::
+
+    pip install audiotsm[stream]
+
+.. _PyGObject:
+    https://pygobject.readthedocs.io/en/latest/getting_started.html
+
+.. _python-gst:
+    https://gstreamer.freedesktop.org/modules/gst-python.html
+
 
 Basic usage
 -----------
