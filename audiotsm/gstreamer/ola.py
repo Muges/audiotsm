@@ -40,14 +40,14 @@ class OLA(GstTSM):
     This is a write-only attribute, that will only take effect the next time
     the audio filter is setup (usually on the next song)."""
 
-    def create_tsm(self, channels, speed):
+    def create_tsm(self, channels):
         parameters = {}
         if self.frame_length > 0:
             parameters['frame_length'] = self.frame_length
         if self.synthesis_hop > 0:
             parameters['synthesis_hop'] = self.synthesis_hop
 
-        return ola(channels, speed, **parameters)
+        return ola(channels, **parameters)
 
 
 OLA.register()

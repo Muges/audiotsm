@@ -47,7 +47,7 @@ class WSOLA(GstTSM):
     This is a write-only attribute, that will only take effect the next time
     the audio filter is setup (usually on the next song)."""
 
-    def create_tsm(self, channels, speed):
+    def create_tsm(self, channels):
         parameters = {}
         if self.frame_length > 0:
             parameters['frame_length'] = self.frame_length
@@ -56,7 +56,7 @@ class WSOLA(GstTSM):
         if self.tolerance >= 0:
             parameters['tolerance'] = self.tolerance
 
-        return wsola(channels, speed, **parameters)
+        return wsola(channels, **parameters)
 
 
 WSOLA.register()

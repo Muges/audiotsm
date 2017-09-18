@@ -17,11 +17,14 @@ follow::
 You should then create a gstreamer pipeline using the audio filter you created.
 See ``examples/audiotsmgtk_basic.py`` for an example of pipeline.
 
-You can change the speed ratio of the ``tsm`` by changing the ``speed``
-property::
+The audio filters work in the same manner as the ``scaletempo`` gstreamer
+plugin. You can change the playback rate by sending a seek event to the
+pipeline::
 
-    tsm.set_property('speed', 1.3)
+    speed = 0.5
+    pipeline.seek(speed, Gst.Format.BYTES, Gst.SeekFlags.FLUSH,
+                  Gst.SeekType.NONE, -1, Gst.SeekType.NONE, -1)
 
-The other parameters of the TSM procedure are also available as properties, as
+The other parameters of the TSM procedure are available as properties, as
 documented for each of the procedures below.
 """

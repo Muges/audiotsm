@@ -89,21 +89,6 @@ class GstTSM(BaseTransform):
 
         self._tsm = None
         self._position = 0
-        self._speed = 1.0
-
-    @GObject.Property(type=float)
-    def speed(self):
-        """The speed ratio by which the speed of the signal will be multiplied
-        (for example, if ``speed`` is 0.5, the output signal will be half as
-        fast as the input signal)."""
-        return self._speed
-
-    @speed.setter
-    def set_speed(self, speed):
-        """Set the speed ratio."""
-        if self._tsm is not None:
-            self._tsm.set_speed(speed)
-        self._speed = speed
 
     @classmethod
     def plugin_init(cls, plugin):
@@ -211,9 +196,19 @@ class GstTSM(BaseTransform):
             self._bps = self._channels * info.width // 8
 
             # Create the TSM object
-            self._tsm = self.create_tsm(self._channels, self._speed)
+            self._tsm = self.create_tsm(self._channels)
 
             self._position = 0
+
+        if event.type == Gst.EventType.SEGMENT:
+            segment = event.parse_segment()
+
+            self._tsm.set_speed(segment.rate)
+
+            segment.applied_rate = segment.rate
+            segment.rate = 1.0
+            event = Gst.Event.new_segment(segment)
+            self.srcpad.push_event(event)
 
         if event.type == Gst.EventType.EOS:
             # Flush the TSM object at the end of the stream
@@ -273,7 +268,7 @@ class GstTSM(BaseTransform):
         output_size = output_length * self._bps
         return True, output_size
 
-    def create_tsm(self, channels, speed):
+    def create_tsm(self, channels):
         """Returns the :class:`~audiotsm.base.tsm.TSM` object used by the audio
         filter."""
         raise NotImplementedError()
