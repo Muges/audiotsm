@@ -1,8 +1,9 @@
 check-manifest
 docutils
-pycodestyle
+gstbasetransform
 jinja2
 libsass
+pycodestyle
 pylint
 pytest
 pytest-coverage
