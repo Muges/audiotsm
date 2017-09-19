@@ -153,7 +153,7 @@ class GstTSM(BaseTransform):
             gstbuffer.append_memory(mem)
 
         gstbuffer.set_size(size)
-        duration = (length * 1000000000) // self._samplerate
+        duration = (length * Gst.SECOND) // self._samplerate
         gstbuffer.duration = duration
 
     def do_sink_event(self, event):
@@ -198,12 +198,11 @@ class GstTSM(BaseTransform):
             # Create the TSM object
             self._tsm = self.create_tsm(self._channels)
 
-            self._position = 0
-
         if event.type == Gst.EventType.SEGMENT:
             segment = event.parse_segment()
 
             self._tsm.set_speed(segment.rate)
+            self._position = segment.position
 
             segment.applied_rate = segment.rate
             segment.rate = 1.0
