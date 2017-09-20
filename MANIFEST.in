@@ -2,6 +2,7 @@ include *.rst *.txt LICENSE .travis.yml tox.ini
 
 recursive-include docs *.py
 recursive-include docs *.rst
+recursive-include docs *.txt
 recursive-include docs *.scss
 recursive-include docs *.js
 recursive-include docs *.html
@@ -11,6 +12,7 @@ include docs/sphinx/Makefile docs/sphinx/make.bat
 recursive-include examples *.py
 
 recursive-include tests *.py
+recursive-include tests *.txt
 recursive-include tests/integration/data *.wav
 recursive-include tests/integration/data *.rst
 include tests/pylintrc

@@ -19,10 +19,6 @@ import re
 import sys
 from setuptools import setup, find_packages
 from setuptools.command.test import test as TestCommand
-try:
-    from sphinx.setup_command import BuildDoc
-except ImportError:
-    BuildDoc = None
 
 
 def find_version():
@@ -82,13 +78,11 @@ setup(
         "sounddevice",
     ],
     extras_require={
-        "doc": ["sphinx", "sphinx_rtd_theme"],
         "stream": ["sounddevice"],
         "gstreamer": ["gstbasetransform"]
     },
 
     cmdclass={
-        'doc': BuildDoc,
         'test': PyTest,
     },
 

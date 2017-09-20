@@ -15,6 +15,8 @@
 
 import os
 import re
+import sys
+from unittest import mock
 
 
 def find_version():
@@ -43,7 +45,6 @@ _release = find_version()
 extensions = [
     'sphinx.ext.autodoc',
     'sphinx.ext.intersphinx',
-    'sphinx.ext.todo',
 ]
 
 # Add any paths that contain templates here, relative to this directory.
@@ -109,6 +110,17 @@ intersphinx_mapping = {
         ('https://python-sounddevice.readthedocs.io/en/latest/', None)
 }
 
+# Mock modules
+autodoc_mock_imports = ['numpy', 'gi', 'sounddevice']
+
+
+class BaseTransform(object):
+    @staticmethod
+    def get_metadata(_):
+        return ''
+
+
+sys.modules['gstbasetransform'] = mock.Mock(BaseTransform=BaseTransform)
 
 # -- Options for HTML output ----------------------------------------------
 
