@@ -234,6 +234,7 @@ class AnalysisSynthesisTSM(TSM):
 
     def set_speed(self, speed):
         self._analysis_hop = int(self._synthesis_hop * speed)
+        self._converter.set_analysis_hop(self._analysis_hop)
 
     def write_to(self, writer):
         n = self._out_buffer.write_to(writer)
@@ -278,3 +279,9 @@ class Converter(object):
             shape (``m``, ``frame_length``), with ``m`` the number of channels.
         """
         raise NotImplementedError
+
+    def set_analysis_hop(self, analysis_hop):
+        """Change the value of the analysis hop. This is called by the
+        :func:`TSM.set_speed` method."""
+        # pylint: disable=no-self-use,unused-argument
+        return
