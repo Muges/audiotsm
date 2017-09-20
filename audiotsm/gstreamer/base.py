@@ -142,6 +142,7 @@ class GstTSM(BaseTransform):
             gstbuffer.duration = 0
             return
 
+        np.clip(data, -1, 1, out=data)
         data = (data.T.reshape((-1,)) * 32767).astype(self._dtype).tobytes()
         size = len(data)
 

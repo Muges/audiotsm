@@ -122,6 +122,8 @@ class WavWriter(base.Writer):
             raise ValueError("the buffer should have the same number of "
                              "channels as the WavWriter")
 
+        np.clip(buffer, -1, 1, out=buffer)
+
         n = buffer.shape[1]
         frames = (buffer.T.reshape((-1,)) * 32676).astype(np.int16).tobytes()
         self._writer.writeframes(frames)
