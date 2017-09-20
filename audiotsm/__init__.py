@@ -19,6 +19,7 @@ object which implements a time-scale modification procedure.
 
 .. autofunction:: audiotsm.ola
 .. autofunction:: audiotsm.wsola
+.. autofunction:: audiotsm.phasevocoder
 """
 
 __version__ = "0.1.1"
@@ -26,3 +27,4 @@ __version__ = "0.1.1"
 
 from .ola import ola
 from .wsola import wsola
+from .phasevocoder import phasevocoder

@@ -11,8 +11,7 @@ Change the speed of an audio file without changing its pitch.
 import argparse
 import os
 
-from audiotsm import ola
-from audiotsm import wsola
+from audiotsm import ola, wsola, phasevocoder
 from audiotsm.io.stream import StreamWriter
 from audiotsm.io.wav import WavReader, WavWriter
 
@@ -33,10 +32,12 @@ def create_writer(output, reader):
 
 def create_tsm(name, channels, parameters):
     """Create a TSM object given the method name and its parameters."""
-    if name == "wsola":
-        return wsola(channels, **parameters)
     if name == "ola":
         return ola(channels, **parameters)
+    if name == "wsola":
+        return wsola(channels, **parameters)
+    if name == "phasevocoder":
+        return phasevocoder(channels, **parameters)
 
     raise ValueError("unknown TSM method: {}".format(name))
 
@@ -52,7 +53,7 @@ def main():
         help="Set the speed ratio (e.g 0.5 to play at half speed)")
     parser.add_argument(
         '-m', '--method', type=str, default="wsola",
-        help="Select the TSM method (ola or wsola)")
+        help="Select the TSM method (ola, wsola, or phasevocoder)")
     parser.add_argument(
         '-l', '--frame-length', metavar='N', type=int, default=None,
         help="Set the frame length to N.")
