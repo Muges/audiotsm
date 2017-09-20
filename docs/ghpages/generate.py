@@ -32,9 +32,10 @@ FILE_RE = re.compile(r'(.+)_([^_]+)\.wav')
 
 METHOD_NAME = {
     'ola': 'OLA',
-    'wsola': 'WSOLA'
+    'wsola': 'WSOLA',
+    'phasevocoder': 'Phase Vocoder',
 }
-METHOD_SORT = ['ola', 'wsola']
+METHOD_SORT = ['ola', 'wsola', 'phasevocoder']
 
 
 def get_examples():

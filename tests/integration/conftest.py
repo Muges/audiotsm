@@ -41,7 +41,7 @@ def pytest_generate_tests(metafunc):
         metafunc.parametrize('speed', [0.5, 1 / 1.2, 1 / 1.8, 2])
 
     if 'tsm_name' in metafunc.fixturenames:
-        metafunc.parametrize('tsm_name', ["ola", "wsola"])
+        metafunc.parametrize('tsm_name', ["ola", "wsola", "phasevocoder"])
 
     if 'save' in metafunc.fixturenames:
         metafunc.parametrize("save", [metafunc.config.getoption('data_save')])

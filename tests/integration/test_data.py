@@ -8,7 +8,7 @@ import os
 import shutil
 import pytest
 
-from audiotsm import ola, wsola
+from audiotsm import ola, wsola, phasevocoder
 from audiotsm.io.wav import WavReader, WavWriter
 from audiotsm.io.array import ArrayWriter
 
@@ -17,10 +17,12 @@ EXAMPLES_DIR = os.path.join("build", "ghpages", "examples")
 
 def create_tsm(name, channels, speed):
     """Create a TSM object given the method name and its parameters."""
-    if name == "wsola":
-        return wsola(channels, speed)
     if name == "ola":
         return ola(channels, speed)
+    if name == "wsola":
+        return wsola(channels, speed)
+    if name == "phasevocoder":
+        return phasevocoder(channels, speed)
 
     raise ValueError("unknown TSM method: {}".format(name))
 
