@@ -21,7 +21,7 @@ object which implements a time-scale modification procedure.
 .. autofunction:: audiotsm.wsola
 """
 
-__version__ = "0.1.0"
+__version__ = "0.1.1"
 
 
 from .ola import ola
