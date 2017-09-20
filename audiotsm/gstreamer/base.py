@@ -86,6 +86,7 @@ class GstTSM(BaseTransform):
         self._samplerate = 0
         self._bps = 0  # bytes per sample
         self._dtype = ''
+        self._audioformatinfo = None
 
         self._tsm = None
         self._position = 0
@@ -118,7 +119,7 @@ class GstTSM(BaseTransform):
         data = mapinfo.data
         gstbuffer.unmap(mapinfo)
 
-        data = np.frombuffer(data, self._dtype).astype(np.float32) / 32676
+        data = np.frombuffer(data, self._dtype).astype(np.float32) / 32767
         data = data.reshape((-1, self._channels)).T
 
         return data
@@ -135,15 +136,19 @@ class GstTSM(BaseTransform):
         :param data: a :class:`numpy.ndarray`.
         """
         length = data.shape[1]
-        data = (data.T.reshape((-1,)) * 32676).astype(self._dtype).tobytes()
+
+        if length <= 0:
+            gstbuffer.set_size(0)
+            gstbuffer.duration = 0
+            return
+
+        data = (data.T.reshape((-1,)) * 32767).astype(self._dtype).tobytes()
         size = len(data)
 
         # Copy as many bytes as possible to the buffer directly
-        n = min(size, gstbuffer.get_size())
-        if n > 0:
-            gstbuffer.fill(0, data[:n])
+        n = gstbuffer.fill(0, data)
 
-        if size > gstbuffer.get_size():
+        if n < size:
             Gst.warning('the output buffer is too small, allocating memory')
 
             # Allocate memory for the rest of the data
@@ -153,8 +158,6 @@ class GstTSM(BaseTransform):
             gstbuffer.append_memory(mem)
 
         gstbuffer.set_size(size)
-        duration = (length * Gst.SECOND) // self._samplerate
-        gstbuffer.duration = duration
 
     def do_sink_event(self, event):
         """Sink pad event handler."""
@@ -188,12 +191,12 @@ class GstTSM(BaseTransform):
                 # Returns False if we were unable to agree on a format.
                 return False
 
-            info = GstAudio.AudioFormat.get_info(
+            self._audioformatinfo = GstAudio.AudioFormat.get_info(
                 GstAudio.AudioFormat.from_string(samples_format)
             )
-            self._dtype = audioformatinfo_to_dtype(info)
+            self._dtype = audioformatinfo_to_dtype(self._audioformatinfo)
 
-            self._bps = self._channels * info.width // 8
+            self._bps = self._channels * self._audioformatinfo.width // 8
 
             # Create the TSM object
             self._tsm = self.create_tsm(self._channels)
@@ -252,6 +255,10 @@ class GstTSM(BaseTransform):
         self._tsm.run(reader, writer, flush=False)
 
         self._ndarray_to_gstbuffer(out_buffer, writer.data)
+        out_buffer.duration = (
+            (out_buffer.get_size() * Gst.SECOND) //
+            (self._bps * self._samplerate)
+        )
         self._position += out_buffer.duration
 
         # Reset the refcount
