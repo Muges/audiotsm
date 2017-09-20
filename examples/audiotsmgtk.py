@@ -13,7 +13,7 @@ gi.require_version('Gtk', '3.0')
 
 # pylint: disable=wrong-import-position
 from gi.repository import Gst, GObject, Gtk
-import audiotsm.gstreamer.wsola  # pylint: disable=unused-import
+import audiotsm.gstreamer.phasevocoder  # pylint: disable=unused-import
 # pylint: enable=wrong-import-position
 
 
@@ -59,7 +59,7 @@ class Player(Gst.Pipeline):
             (GObject.SIGNAL_RUN_FIRST, None, (GObject.TYPE_INT,))
     }
 
-    def __init__(self, tsm_description="audiotsm-wsola"):
+    def __init__(self, tsm_description="audiotsm-phase-vocoder"):
         super().__init__()
 
         self._speed = 1.0
