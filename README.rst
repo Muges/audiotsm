@@ -72,8 +72,11 @@ various audio files and at various speeds on the `examples page`_.
 
 .. _examples page: https://muges.github.io/audiotsm/
 
+Python API
+~~~~~~~~~~
+
 Below is a basic example showing how to reduce the speed of a wav file by half
-using the WSOLA procedure::
+using the phase vocoder procedure::
 
     from audiotsm import phasevocoder
     from audiotsm.io.wav import WavReader, WavWriter
@@ -82,6 +85,22 @@ using the WSOLA procedure::
         with WavWriter(output_filename, reader.channels, reader.samplerate) as writer:
             tsm = phasevocoder(reader.channels, speed=0.5)
             tsm.run(reader, writer)
+
+A complete example can be found in the ``examples/audiotsmcli.py`` file. Read
+the documentation__ for more details.
+
+__ http://audiotsm.readthedocs.io/en/latest/tsm.html
+
+GStreamer plugins
+~~~~~~~~~~~~~~~~~
+
+The TSM procedures are also available as GStreamer plugins. A simple example
+implementing a basic GStreamer pipeline can be found in the
+``examples/audiotsmcli_gst.py`` file, and a more complete one showing how to
+use the plugins in a GTK audio player can be found in the
+``examples/audiotsmgtk.py`` file. Read the documentation__ for more details.
+
+__ http://audiotsm.readthedocs.io/en/latest/gstreamer.html
 
 Thanks
 ------
