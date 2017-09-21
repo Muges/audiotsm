@@ -23,3 +23,4 @@ Phase Vocoder
 
 .. automodule:: audiotsm.gstreamer.phasevocoder
     :members:
+    :show-inheritance:
