@@ -1,4 +1,4 @@
-include *.rst *.txt LICENSE .travis.yml tox.ini
+include *.rst *.txt *.yml LICENSE tox.ini
 
 recursive-include docs *.py
 recursive-include docs *.rst
