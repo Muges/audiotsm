@@ -29,7 +29,7 @@ object which implements a time-scale modification procedure.
 .. _examples page: https://muges.github.io/audiotsm/
 """
 
-__version__ = "0.1.1"
+__version__ = "0.1.2"
 
 
 from .ola import ola
