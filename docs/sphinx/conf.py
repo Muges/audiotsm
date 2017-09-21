@@ -111,8 +111,7 @@ intersphinx_mapping = {
 }
 
 # Mock modules
-autodoc_mock_imports = ['numpy', 'gi', 'gi.repository', 'gi.types',
-                        'sounddevice']
+autodoc_mock_imports = ['numpy', 'gi', 'gi.types', 'sounddevice']
 
 
 class BaseTransform(object):
@@ -122,6 +121,7 @@ class BaseTransform(object):
 
 
 sys.modules['gstbasetransform'] = mock.Mock(BaseTransform=BaseTransform)
+sys.modules['gi.repository'] = mock.Mock()
 
 # -- Options for HTML output ----------------------------------------------
 
