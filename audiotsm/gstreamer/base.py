@@ -5,7 +5,6 @@ The :mod:`~audiotsm.gstreamer.base` module provides a base class for gstreamer
 plugin using :class:`~audiotsm.base.tsm.TSM` objects.
 """
 
-import sys
 import numpy as np
 import gi
 gi.require_version('Gst', '1.0')
@@ -17,8 +16,6 @@ from audiotsm import __version__
 from audiotsm.io.array import ArrayReader, ArrayWriter
 from gstbasetransform import BaseTransform
 # pylint: enable=wrong-import-position
-
-Gst.init(sys.argv)
 
 CAPS = Gst.Caps.from_string(
     "audio/x-raw,format=S16LE,layout=interleaved")

@@ -12,6 +12,7 @@ gi.require_version('Gst', '1.0')
 
 # pylint: disable=wrong-import-position
 from gi.repository import Gst, GObject
+Gst.init(sys.argv)
 import audiotsm.gstreamer.wsola  # pylint: disable=unused-import
 # pylint: enable=wrong-import-position
 

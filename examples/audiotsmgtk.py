@@ -13,6 +13,7 @@ gi.require_version('Gtk', '3.0')
 
 # pylint: disable=wrong-import-position
 from gi.repository import Gst, GObject, Gtk
+Gst.init(sys.argv)
 import audiotsm.gstreamer.phasevocoder  # pylint: disable=unused-import
 # pylint: enable=wrong-import-position
 
@@ -389,8 +390,6 @@ def main():
     if len(sys.argv) <= 1:
         print('usage: audiotsmgtk.py <filename>')
         return
-
-    Gst.init(sys.argv)
 
     window = MainWindow()
     window.open_file(sys.argv[1])
