@@ -17,3 +17,9 @@ WSOLA
 .. automodule:: audiotsm.gstreamer.wsola
     :members:
     :show-inheritance:
+
+Phase Vocoder
+-------------
+
+.. automodule:: audiotsm.gstreamer.phasevocoder
+    :members:

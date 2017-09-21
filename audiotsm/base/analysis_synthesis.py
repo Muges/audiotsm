@@ -282,6 +282,6 @@ class Converter(object):
 
     def set_analysis_hop(self, analysis_hop):
         """Change the value of the analysis hop. This is called by the
-        :func:`TSM.set_speed` method."""
+        :func:`~audiotsm.base.tsm.TSM.set_speed` method."""
         # pylint: disable=no-self-use,unused-argument
         return

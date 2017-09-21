@@ -58,25 +58,29 @@ Basic usage
 
 The audiotsm package implements several time-scale modification procedures:
 
-- OLA (Overlap-Add), which should only be used for percussive audio signals;
-- WSOLA (Waveform Similarity-based Overlap-Add), an amelioration of the OLA
-  procedure which should give good results on most inputs.
+- OLA (Overlap-Add);
+- WSOLA (Waveform Similarity-based Overlap-Add);
+- Phase Vocoder.
 
-If you are unsure which procedure to choose, the WSOLA should sound best in
-most cases. You can listen to the output of the different procedures on various
-audio files and at various speeds on the `examples page`_.
+The OLA procedure should only be used on percussive audio signals. The WSOLA
+and the Phase Vocoder procedures are improvements of the OLA procedure, and
+should both give good results in most cases.
+
+If you are unsure which procedure to choose, the Phase Vocoder should sound
+best in most cases. You can listen to the output of the different procedures on
+various audio files and at various speeds on the `examples page`_.
 
 .. _examples page: https://muges.github.io/audiotsm/
 
 Below is a basic example showing how to reduce the speed of a wav file by half
 using the WSOLA procedure::
 
-    from audiotsm import wsola
+    from audiotsm import phasevocoder
     from audiotsm.io.wav import WavReader, WavWriter
 
     with WavReader(input_filename) as reader:
         with WavWriter(output_filename, reader.channels, reader.samplerate) as writer:
-            tsm = wsola(reader.channels, speed=0.5)
+            tsm = phasevocoder(reader.channels, speed=0.5)
             tsm.run(reader, writer)
 
 Thanks
