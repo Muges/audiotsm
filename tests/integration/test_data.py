@@ -8,7 +8,7 @@ import os
 import shutil
 import pytest
 
-from audiotsm import ola, wsola, phasevocoder
+from audiotsm import ola, wsola, phasevocoder, PhaseLocking
 from audiotsm.io.wav import WavReader, WavWriter
 from audiotsm.io.array import ArrayWriter
 
@@ -22,7 +22,10 @@ def create_tsm(name, channels, speed):
     if name == "wsola":
         return wsola(channels, speed)
     if name == "phasevocoder":
-        return phasevocoder(channels, speed)
+        return phasevocoder(channels, speed, phase_locking=PhaseLocking.NONE)
+    if name == "phasevocoder_identity":
+        return phasevocoder(channels, speed,
+                            phase_locking=PhaseLocking.IDENTITY)
 
     raise ValueError("unknown TSM method: {}".format(name))
 

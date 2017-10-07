@@ -30,6 +30,9 @@ h1, h2, h3 {
     table {
         white-space: nowrap;
     }
+    thead {
+        vertical-align: bottom;
+    }
 }
 
 .player {

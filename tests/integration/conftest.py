@@ -38,10 +38,11 @@ def get_data_files():
 def pytest_generate_tests(metafunc):
     """Generate tests for test_data.py."""
     if 'speed' in metafunc.fixturenames:
-        metafunc.parametrize('speed', [0.5, 1 / 1.2, 1 / 1.8, 2])
+        metafunc.parametrize('speed', [1 / 1.2, 1 / 1.8, 2])
 
     if 'tsm_name' in metafunc.fixturenames:
-        metafunc.parametrize('tsm_name', ["ola", "wsola", "phasevocoder"])
+        metafunc.parametrize('tsm_name', [
+            "ola", "wsola", "phasevocoder", "phasevocoder_identity"])
 
     if 'save' in metafunc.fixturenames:
         metafunc.parametrize("save", [metafunc.config.getoption('data_save')])

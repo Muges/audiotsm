@@ -28,14 +28,16 @@ ENVIRONMENT = Environment(
     autoescape=True, trim_blocks=False)
 
 SPEED_DIR_RE = re.compile(r'speed-([\d\.]+)')
-FILE_RE = re.compile(r'(.+)_([^_]+)\.wav')
+FILE_RE = re.compile(r'([^_]+)_(.+)\.wav')
 
 METHOD_NAME = {
     'ola': 'OLA',
     'wsola': 'WSOLA',
-    'phasevocoder': 'Phase Vocoder',
+    'phasevocoder': Markup('Phase<br/>Vocoder'),
+    'phasevocoder_identity': Markup(
+        'Phase Vocoder<br/>(identity)'),
 }
-METHOD_SORT = ['ola', 'wsola', 'phasevocoder']
+METHOD_SORT = ['ola', 'wsola', 'phasevocoder', 'phasevocoder_identity']
 
 
 def get_examples():
