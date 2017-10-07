@@ -25,6 +25,8 @@ object which implements a time-scale modification procedure.
 .. autofunction:: audiotsm.ola
 .. autofunction:: audiotsm.wsola
 .. autofunction:: audiotsm.phasevocoder
+.. autoclass:: audiotsm.PhaseLocking
+    :members:
 
 .. _examples page: https://muges.github.io/audiotsm/
 """
@@ -34,4 +36,4 @@ __version__ = "0.1.2"
 
 from .ola import ola
 from .wsola import wsola
-from .phasevocoder import phasevocoder
+from .phasevocoder import phasevocoder, PhaseLocking

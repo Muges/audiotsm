@@ -40,12 +40,21 @@ class PhaseVocoder(GstTSM):
     This is a write-only attribute, that will only take effect the next time
     the audio filter is setup (usually on the next song)."""
 
+    phase_locking = GObject.Property(type=int, default=-1,
+                                     flags=GObject.ParamFlags.WRITABLE)
+    """The phase locking strategy.
+
+    This is a write-only attribute, that will only take effect the next time
+    the audio filter is setup (usually on the next song)."""
+
     def create_tsm(self, channels):
         parameters = {}
         if self.frame_length > 0:
             parameters['frame_length'] = self.frame_length
         if self.synthesis_hop > 0:
             parameters['synthesis_hop'] = self.synthesis_hop
+        if self.phase_locking >= 0:
+            parameters['phase_locking'] = self.phase_locking
 
         return phasevocoder(channels, **parameters)
 

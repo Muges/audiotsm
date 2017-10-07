@@ -11,7 +11,7 @@ Change the speed of an audio file without changing its pitch.
 import argparse
 import os
 
-from audiotsm import ola, wsola, phasevocoder
+from audiotsm import ola, wsola, phasevocoder, PhaseLocking
 from audiotsm.io.stream import StreamWriter
 from audiotsm.io.wav import WavReader, WavWriter
 
@@ -65,7 +65,11 @@ def main():
         help="Set the synthesis hop to N.")
     parser.add_argument(
         '-t', '--tolerance', metavar='N', type=int, default=None,
-        help="Set the tolerance to N (only used when method is set wsola).")
+        help="Set the tolerance to N (only used when method is set to wsola).")
+    parser.add_argument(
+        '-p', '--phase-locking', metavar='S', type=str, default=None,
+        help=("Set the phase locking strategy (none or identity; "
+              "only used when method is set to phasevocoder)."))
     parser.add_argument(
         '-o', '--output', metavar='FILENAME', type=str, default=None,
         help="Write the output in the wav file FILENAME.")
@@ -91,6 +95,8 @@ def main():
         parameters['synthesis_hop'] = args.synthesis_hop
     if args.tolerance is not None and args.method == "wsola":
         parameters['tolerance'] = args.tolerance
+    if args.phase_locking and args.method == "phasevocoder":
+        parameters['phase_locking'] = PhaseLocking.from_str(args.phase_locking)
 
     # Run the TSM procedure
     with WavReader(args.input_filename) as reader:
