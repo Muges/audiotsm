@@ -48,39 +48,36 @@ class PhaseVocoderConverter(Converter):
 
             if self._first:
                 # Leave the first frame unchanged
-                np.copyto(self._output_phase[k], phase)
-                np.copyto(self._previous_phase[k], phase)
-                del phase
-                del amplitude
-                continue
+                self._output_phase[k, :] = phase
+            else:
+                # Compute the phase increment
+                self._buffer[:] = (
+                    phase - self._previous_phase[k] -
+                    self._analysis_hop * self._center_frequency
+                )
 
-            # Compute the phase increment
-            np.copyto(self._buffer, (
-                phase - self._previous_phase[k] -
-                self._analysis_hop * self._center_frequency
-            ))
+                # Unwrap the phase increment
+                self._buffer += np.pi
+                self._buffer %= 2 * np.pi
+                self._buffer -= np.pi
 
-            # Unwrap the phase increment
-            self._buffer += np.pi
-            self._buffer %= 2 * np.pi
-            self._buffer -= np.pi
+                # Compute the instantaneous frequency (in the same buffer,
+                # since the phase increment wont be required after that)
+                self._buffer /= self._analysis_hop
+                self._buffer += self._center_frequency
+
+                self._buffer *= self._synthesis_hop
+                self._output_phase[k] += self._buffer
+
+                # Compute the new stft
+                output_stft = amplitude * np.exp(1j * self._output_phase[k])
+
+                frame[k, :] = np.fft.irfft(output_stft).real
 
             # Save the phase for the next analysis frame
-            np.copyto(self._previous_phase[k], phase)
+            self._previous_phase[k, :] = phase
             del phase
-
-            # Compute the instantaneous frequency (in the same buffer, since
-            # the phase increment wont be required after that)
-            self._buffer /= self._analysis_hop
-            self._buffer += self._center_frequency
-
-            self._output_phase[k] += self._synthesis_hop * self._buffer
-
-            # Compute the new stft
-            output_stft = amplitude * np.exp(1j * self._output_phase[k])
             del amplitude
-
-            np.copyto(frame[k], np.fft.irfft(output_stft).real)
 
         self._first = False
 
