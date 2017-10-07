@@ -40,21 +40,12 @@ class PhaseVocoder(GstTSM):
     This is a write-only attribute, that will only take effect the next time
     the audio filter is setup (usually on the next song)."""
 
-    tolerance = GObject.Property(type=int, default=-1,
-                                 flags=GObject.ParamFlags.WRITABLE)
-    """The maximum number of samples that the analysis frame can be shifted.
-
-    This is a write-only attribute, that will only take effect the next time
-    the audio filter is setup (usually on the next song)."""
-
     def create_tsm(self, channels):
         parameters = {}
         if self.frame_length > 0:
             parameters['frame_length'] = self.frame_length
         if self.synthesis_hop > 0:
             parameters['synthesis_hop'] = self.synthesis_hop
-        if self.tolerance >= 0:
-            parameters['tolerance'] = self.tolerance
 
         return phasevocoder(channels, **parameters)
 
