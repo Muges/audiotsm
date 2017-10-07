@@ -1,0 +1,1676 @@
+<!doctype html>
+<html>
+  <head>
+    <title>AudioTSM : Examples</title>
+    <meta charset="UTF-8"> 
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" href="css/audiotsm.css">
+  </head>
+  <body>
+    <header class="navbar">
+      <div class="navbar-section">
+        <a href="index.html" class="btn btn-link text-bold">AudioTSM</a>
+        <a href="https://audiotsm.readthedocs.io/" class="btn btn-link">Documentation</a>
+      </div>
+      
+      <div class="navbar-section">
+        <a href="https://github.com/Muges/audiotsm" class="btn btn-primary icon-btn">
+          <img src="images/github.svg" alt="" />
+          <span>GitHub</span>
+        </a>
+      </div>
+    </header>
+
+    <section class="content content-width">
+      <h2>AudioTSM examples</h2>
+
+      <p>AudioTSM is a python library implementing various time-scale
+      modification procedures, i.e. procedures that change the speed of an
+      audio signal without changing its pitch. None of those methods are
+      perfect, and the quality of the results depends on the audio signal and
+      the parameters of the algorithm. This page gives an overview of the
+      result obtained for each method with various inputs and at various
+      speeds.</p>
+
+      <p>The <a href="#credits">credits</a> for the audio files listed below
+      are available at the end of this page.</p>
+    </section>
+    
+    
+    <section class="content content-width">
+      <h3>Speed = 0.56</h3>
+
+      <div class="examples">
+        <table class="table table-striped table-hover">
+          <thead>
+            <tr>
+              <th>Name</th>
+              <th>Original</th>
+              
+              <th>OLA</th>
+              
+              <th>WSOLA</th>
+              
+              <th>Phase<br/>Vocoder</th>
+              
+              <th>Phase Vocoder<br/>(identity)</th>
+              
+            </tr>
+          </thead>
+          <tbody>
+            
+            <tr>
+              <td>beethoven/MoonlightSonata</td>
+              <td>
+                <a href="examples/orig/beethoven/MoonlightSonata.wav" class="play-btn icon-btn btn-small">
+                  <img src="images/play.svg" alt="" />
+                  <span>Play</span>
+                </a>
+              </td>
+              
+              <td>
+                <a href="examples/speed-0.56/beethoven/MoonlightSonata_ola.wav" class="play-btn icon-btn btn-small">
+                  <img src="images/play.svg" alt="" />
+                  <span>Play</span>
+                </a>
+              </td>
+              
+              <td>
+                <a href="examples/speed-0.56/beethoven/MoonlightSonata_wsola.wav" class="play-btn icon-btn btn-small">
+                  <img src="images/play.svg" alt="" />
+                  <span>Play</span>
+                </a>
+              </td>
+              
+              <td>
+                <a href="examples/speed-0.56/beethoven/MoonlightSonata_phasevocoder.wav" class="play-btn icon-btn btn-small">
+                  <img src="images/play.svg" alt="" />
+                  <span>Play</span>
+                </a>
+              </td>
+              
+              <td>
+                <a href="examples/speed-0.56/beethoven/MoonlightSonata_phasevocoder_identity.wav" class="play-btn icon-btn btn-small">
+                  <img src="images/play.svg" alt="" />
+                  <span>Play</span>
+                </a>
+              </td>
+              
+            </tr>
+            
+            <tr>
+              <td>brad-sucks/DroppingOutOfSchool</td>
+              <td>
+                <a href="examples/orig/brad-sucks/DroppingOutOfSchool.wav" class="play-btn icon-btn btn-small">
+                  <img src="images/play.svg" alt="" />
+                  <span>Play</span>
+                </a>
+              </td>
+              
+              <td>
+                <a href="examples/speed-0.56/brad-sucks/DroppingOutOfSchool_ola.wav" class="play-btn icon-btn btn-small">
+                  <img src="images/play.svg" alt="" />
+                  <span>Play</span>
+                </a>
+              </td>
+              
+              <td>
+                <a href="examples/speed-0.56/brad-sucks/DroppingOutOfSchool_wsola.wav" class="play-btn icon-btn btn-small">
+                  <img src="images/play.svg" alt="" />
+                  <span>Play</span>
+                </a>
+              </td>
+              
+              <td>
+                <a href="examples/speed-0.56/brad-sucks/DroppingOutOfSchool_phasevocoder.wav" class="play-btn icon-btn btn-small">
+                  <img src="images/play.svg" alt="" />
+                  <span>Play</span>
+                </a>
+              </td>
+              
+              <td>
+                <a href="examples/speed-0.56/brad-sucks/DroppingOutOfSchool_phasevocoder_identity.wav" class="play-btn icon-btn btn-small">
+                  <img src="images/play.svg" alt="" />
+                  <span>Play</span>
+                </a>
+              </td>
+              
+            </tr>
+            
+            <tr>
+              <td>brad-sucks/TheresSomethingWrong</td>
+              <td>
+                <a href="examples/orig/brad-sucks/TheresSomethingWrong.wav" class="play-btn icon-btn btn-small">
+                  <img src="images/play.svg" alt="" />
+                  <span>Play</span>
+                </a>
+              </td>
+              
+              <td>
+                <a href="examples/speed-0.56/brad-sucks/TheresSomethingWrong_ola.wav" class="play-btn icon-btn btn-small">
+                  <img src="images/play.svg" alt="" />
+                  <span>Play</span>
+                </a>
+              </td>
+              
+              <td>
+                <a href="examples/speed-0.56/brad-sucks/TheresSomethingWrong_wsola.wav" class="play-btn icon-btn btn-small">
+                  <img src="images/play.svg" alt="" />
+                  <span>Play</span>
+                </a>
+              </td>
+              
+              <td>
+                <a href="examples/speed-0.56/brad-sucks/TheresSomethingWrong_phasevocoder.wav" class="play-btn icon-btn btn-small">
+                  <img src="images/play.svg" alt="" />
+                  <span>Play</span>
+                </a>
+              </td>
+              
+              <td>
+                <a href="examples/speed-0.56/brad-sucks/TheresSomethingWrong_phasevocoder_identity.wav" class="play-btn icon-btn btn-small">
+                  <img src="images/play.svg" alt="" />
+                  <span>Play</span>
+                </a>
+              </td>
+              
+            </tr>
+            
+            <tr>
+              <td>tsmtoolbox/Bongo</td>
+              <td>
+                <a href="examples/orig/tsmtoolbox/Bongo.wav" class="play-btn icon-btn btn-small">
+                  <img src="images/play.svg" alt="" />
+                  <span>Play</span>
+                </a>
+              </td>
+              
+              <td>
+                <a href="examples/speed-0.56/tsmtoolbox/Bongo_ola.wav" class="play-btn icon-btn btn-small">
+                  <img src="images/play.svg" alt="" />
+                  <span>Play</span>
+                </a>
+              </td>
+              
+              <td>
+                <a href="examples/speed-0.56/tsmtoolbox/Bongo_wsola.wav" class="play-btn icon-btn btn-small">
+                  <img src="images/play.svg" alt="" />
+                  <span>Play</span>
+                </a>
+              </td>
+              
+              <td>
+                <a href="examples/speed-0.56/tsmtoolbox/Bongo_phasevocoder.wav" class="play-btn icon-btn btn-small">
+                  <img src="images/play.svg" alt="" />
+                  <span>Play</span>
+                </a>
+              </td>
+              
+              <td>
+                <a href="examples/speed-0.56/tsmtoolbox/Bongo_phasevocoder_identity.wav" class="play-btn icon-btn btn-small">
+                  <img src="images/play.svg" alt="" />
+                  <span>Play</span>
+                </a>
+              </td>
+              
+            </tr>
+            
+            <tr>
+              <td>tsmtoolbox/CastanetsViolin</td>
+              <td>
+                <a href="examples/orig/tsmtoolbox/CastanetsViolin.wav" class="play-btn icon-btn btn-small">
+                  <img src="images/play.svg" alt="" />
+                  <span>Play</span>
+                </a>
+              </td>
+              
+              <td>
+                <a href="examples/speed-0.56/tsmtoolbox/CastanetsViolin_ola.wav" class="play-btn icon-btn btn-small">
+                  <img src="images/play.svg" alt="" />
+                  <span>Play</span>
+                </a>
+              </td>
+              
+              <td>
+                <a href="examples/speed-0.56/tsmtoolbox/CastanetsViolin_wsola.wav" class="play-btn icon-btn btn-small">
+                  <img src="images/play.svg" alt="" />
+                  <span>Play</span>
+                </a>
+              </td>
+              
+              <td>
+                <a href="examples/speed-0.56/tsmtoolbox/CastanetsViolin_phasevocoder.wav" class="play-btn icon-btn btn-small">
+                  <img src="images/play.svg" alt="" />
+                  <span>Play</span>
+                </a>
+              </td>
+              
+              <td>
+                <a href="examples/speed-0.56/tsmtoolbox/CastanetsViolin_phasevocoder_identity.wav" class="play-btn icon-btn btn-small">
+                  <img src="images/play.svg" alt="" />
+                  <span>Play</span>
+                </a>
+              </td>
+              
+            </tr>
+            
+            <tr>
+              <td>tsmtoolbox/DrumSolo</td>
+              <td>
+                <a href="examples/orig/tsmtoolbox/DrumSolo.wav" class="play-btn icon-btn btn-small">
+                  <img src="images/play.svg" alt="" />
+                  <span>Play</span>
+                </a>
+              </td>
+              
+              <td>
+                <a href="examples/speed-0.56/tsmtoolbox/DrumSolo_ola.wav" class="play-btn icon-btn btn-small">
+                  <img src="images/play.svg" alt="" />
+                  <span>Play</span>
+                </a>
+              </td>
+              
+              <td>
+                <a href="examples/speed-0.56/tsmtoolbox/DrumSolo_wsola.wav" class="play-btn icon-btn btn-small">
+                  <img src="images/play.svg" alt="" />
+                  <span>Play</span>
+                </a>
+              </td>
+              
+              <td>
+                <a href="examples/speed-0.56/tsmtoolbox/DrumSolo_phasevocoder.wav" class="play-btn icon-btn btn-small">
+                  <img src="images/play.svg" alt="" />
+                  <span>Play</span>
+                </a>
+              </td>
+              
+              <td>
+                <a href="examples/speed-0.56/tsmtoolbox/DrumSolo_phasevocoder_identity.wav" class="play-btn icon-btn btn-small">
+                  <img src="images/play.svg" alt="" />
+                  <span>Play</span>
+                </a>
+              </td>
+              
+            </tr>
+            
+            <tr>
+              <td>tsmtoolbox/Glockenspiel</td>
+              <td>
+                <a href="examples/orig/tsmtoolbox/Glockenspiel.wav" class="play-btn icon-btn btn-small">
+                  <img src="images/play.svg" alt="" />
+                  <span>Play</span>
+                </a>
+              </td>
+              
+              <td>
+                <a href="examples/speed-0.56/tsmtoolbox/Glockenspiel_ola.wav" class="play-btn icon-btn btn-small">
+                  <img src="images/play.svg" alt="" />
+                  <span>Play</span>
+                </a>
+              </td>
+              
+              <td>
+                <a href="examples/speed-0.56/tsmtoolbox/Glockenspiel_wsola.wav" class="play-btn icon-btn btn-small">
+                  <img src="images/play.svg" alt="" />
+                  <span>Play</span>
+                </a>
+              </td>
+              
+              <td>
+                <a href="examples/speed-0.56/tsmtoolbox/Glockenspiel_phasevocoder.wav" class="play-btn icon-btn btn-small">
+                  <img src="images/play.svg" alt="" />
+                  <span>Play</span>
+                </a>
+              </td>
+              
+              <td>
+                <a href="examples/speed-0.56/tsmtoolbox/Glockenspiel_phasevocoder_identity.wav" class="play-btn icon-btn btn-small">
+                  <img src="images/play.svg" alt="" />
+                  <span>Play</span>
+                </a>
+              </td>
+              
+            </tr>
+            
+            <tr>
+              <td>tsmtoolbox/Jazz</td>
+              <td>
+                <a href="examples/orig/tsmtoolbox/Jazz.wav" class="play-btn icon-btn btn-small">
+                  <img src="images/play.svg" alt="" />
+                  <span>Play</span>
+                </a>
+              </td>
+              
+              <td>
+                <a href="examples/speed-0.56/tsmtoolbox/Jazz_ola.wav" class="play-btn icon-btn btn-small">
+                  <img src="images/play.svg" alt="" />
+                  <span>Play</span>
+                </a>
+              </td>
+              
+              <td>
+                <a href="examples/speed-0.56/tsmtoolbox/Jazz_wsola.wav" class="play-btn icon-btn btn-small">
+                  <img src="images/play.svg" alt="" />
+                  <span>Play</span>
+                </a>
+              </td>
+              
+              <td>
+                <a href="examples/speed-0.56/tsmtoolbox/Jazz_phasevocoder.wav" class="play-btn icon-btn btn-small">
+                  <img src="images/play.svg" alt="" />
+                  <span>Play</span>
+                </a>
+              </td>
+              
+              <td>
+                <a href="examples/speed-0.56/tsmtoolbox/Jazz_phasevocoder_identity.wav" class="play-btn icon-btn btn-small">
+                  <img src="images/play.svg" alt="" />
+                  <span>Play</span>
+                </a>
+              </td>
+              
+            </tr>
+            
+            <tr>
+              <td>tsmtoolbox/Pop</td>
+              <td>
+                <a href="examples/orig/tsmtoolbox/Pop.wav" class="play-btn icon-btn btn-small">
+                  <img src="images/play.svg" alt="" />
+                  <span>Play</span>
+                </a>
+              </td>
+              
+              <td>
+                <a href="examples/speed-0.56/tsmtoolbox/Pop_ola.wav" class="play-btn icon-btn btn-small">
+                  <img src="images/play.svg" alt="" />
+                  <span>Play</span>
+                </a>
+              </td>
+              
+              <td>
+                <a href="examples/speed-0.56/tsmtoolbox/Pop_wsola.wav" class="play-btn icon-btn btn-small">
+                  <img src="images/play.svg" alt="" />
+                  <span>Play</span>
+                </a>
+              </td>
+              
+              <td>
+                <a href="examples/speed-0.56/tsmtoolbox/Pop_phasevocoder.wav" class="play-btn icon-btn btn-small">
+                  <img src="images/play.svg" alt="" />
+                  <span>Play</span>
+                </a>
+              </td>
+              
+              <td>
+                <a href="examples/speed-0.56/tsmtoolbox/Pop_phasevocoder_identity.wav" class="play-btn icon-btn btn-small">
+                  <img src="images/play.svg" alt="" />
+                  <span>Play</span>
+                </a>
+              </td>
+              
+            </tr>
+            
+            <tr>
+              <td>tsmtoolbox/SingingVoice</td>
+              <td>
+                <a href="examples/orig/tsmtoolbox/SingingVoice.wav" class="play-btn icon-btn btn-small">
+                  <img src="images/play.svg" alt="" />
+                  <span>Play</span>
+                </a>
+              </td>
+              
+              <td>
+                <a href="examples/speed-0.56/tsmtoolbox/SingingVoice_ola.wav" class="play-btn icon-btn btn-small">
+                  <img src="images/play.svg" alt="" />
+                  <span>Play</span>
+                </a>
+              </td>
+              
+              <td>
+                <a href="examples/speed-0.56/tsmtoolbox/SingingVoice_wsola.wav" class="play-btn icon-btn btn-small">
+                  <img src="images/play.svg" alt="" />
+                  <span>Play</span>
+                </a>
+              </td>
+              
+              <td>
+                <a href="examples/speed-0.56/tsmtoolbox/SingingVoice_phasevocoder.wav" class="play-btn icon-btn btn-small">
+                  <img src="images/play.svg" alt="" />
+                  <span>Play</span>
+                </a>
+              </td>
+              
+              <td>
+                <a href="examples/speed-0.56/tsmtoolbox/SingingVoice_phasevocoder_identity.wav" class="play-btn icon-btn btn-small">
+                  <img src="images/play.svg" alt="" />
+                  <span>Play</span>
+                </a>
+              </td>
+              
+            </tr>
+            
+            <tr>
+              <td>tsmtoolbox/Stepdad</td>
+              <td>
+                <a href="examples/orig/tsmtoolbox/Stepdad.wav" class="play-btn icon-btn btn-small">
+                  <img src="images/play.svg" alt="" />
+                  <span>Play</span>
+                </a>
+              </td>
+              
+              <td>
+                <a href="examples/speed-0.56/tsmtoolbox/Stepdad_ola.wav" class="play-btn icon-btn btn-small">
+                  <img src="images/play.svg" alt="" />
+                  <span>Play</span>
+                </a>
+              </td>
+              
+              <td>
+                <a href="examples/speed-0.56/tsmtoolbox/Stepdad_wsola.wav" class="play-btn icon-btn btn-small">
+                  <img src="images/play.svg" alt="" />
+                  <span>Play</span>
+                </a>
+              </td>
+              
+              <td>
+                <a href="examples/speed-0.56/tsmtoolbox/Stepdad_phasevocoder.wav" class="play-btn icon-btn btn-small">
+                  <img src="images/play.svg" alt="" />
+                  <span>Play</span>
+                </a>
+              </td>
+              
+              <td>
+                <a href="examples/speed-0.56/tsmtoolbox/Stepdad_phasevocoder_identity.wav" class="play-btn icon-btn btn-small">
+                  <img src="images/play.svg" alt="" />
+                  <span>Play</span>
+                </a>
+              </td>
+              
+            </tr>
+            
+            <tr>
+              <td>tsmtoolbox/SynthMono</td>
+              <td>
+                <a href="examples/orig/tsmtoolbox/SynthMono.wav" class="play-btn icon-btn btn-small">
+                  <img src="images/play.svg" alt="" />
+                  <span>Play</span>
+                </a>
+              </td>
+              
+              <td>
+                <a href="examples/speed-0.56/tsmtoolbox/SynthMono_ola.wav" class="play-btn icon-btn btn-small">
+                  <img src="images/play.svg" alt="" />
+                  <span>Play</span>
+                </a>
+              </td>
+              
+              <td>
+                <a href="examples/speed-0.56/tsmtoolbox/SynthMono_wsola.wav" class="play-btn icon-btn btn-small">
+                  <img src="images/play.svg" alt="" />
+                  <span>Play</span>
+                </a>
+              </td>
+              
+              <td>
+                <a href="examples/speed-0.56/tsmtoolbox/SynthMono_phasevocoder.wav" class="play-btn icon-btn btn-small">
+                  <img src="images/play.svg" alt="" />
+                  <span>Play</span>
+                </a>
+              </td>
+              
+              <td>
+                <a href="examples/speed-0.56/tsmtoolbox/SynthMono_phasevocoder_identity.wav" class="play-btn icon-btn btn-small">
+                  <img src="images/play.svg" alt="" />
+                  <span>Play</span>
+                </a>
+              </td>
+              
+            </tr>
+            
+            <tr>
+              <td>tsmtoolbox/SynthPoly</td>
+              <td>
+                <a href="examples/orig/tsmtoolbox/SynthPoly.wav" class="play-btn icon-btn btn-small">
+                  <img src="images/play.svg" alt="" />
+                  <span>Play</span>
+                </a>
+              </td>
+              
+              <td>
+                <a href="examples/speed-0.56/tsmtoolbox/SynthPoly_ola.wav" class="play-btn icon-btn btn-small">
+                  <img src="images/play.svg" alt="" />
+                  <span>Play</span>
+                </a>
+              </td>
+              
+              <td>
+                <a href="examples/speed-0.56/tsmtoolbox/SynthPoly_wsola.wav" class="play-btn icon-btn btn-small">
+                  <img src="images/play.svg" alt="" />
+                  <span>Play</span>
+                </a>
+              </td>
+              
+              <td>
+                <a href="examples/speed-0.56/tsmtoolbox/SynthPoly_phasevocoder.wav" class="play-btn icon-btn btn-small">
+                  <img src="images/play.svg" alt="" />
+                  <span>Play</span>
+                </a>
+              </td>
+              
+              <td>
+                <a href="examples/speed-0.56/tsmtoolbox/SynthPoly_phasevocoder_identity.wav" class="play-btn icon-btn btn-small">
+                  <img src="images/play.svg" alt="" />
+                  <span>Play</span>
+                </a>
+              </td>
+              
+            </tr>
+            
+          </tbody>
+        </table>
+      </div>
+    </section>
+    
+    <section class="content content-width">
+      <h3>Speed = 0.83</h3>
+
+      <div class="examples">
+        <table class="table table-striped table-hover">
+          <thead>
+            <tr>
+              <th>Name</th>
+              <th>Original</th>
+              
+              <th>OLA</th>
+              
+              <th>WSOLA</th>
+              
+              <th>Phase<br/>Vocoder</th>
+              
+              <th>Phase Vocoder<br/>(identity)</th>
+              
+            </tr>
+          </thead>
+          <tbody>
+            
+            <tr>
+              <td>beethoven/MoonlightSonata</td>
+              <td>
+                <a href="examples/orig/beethoven/MoonlightSonata.wav" class="play-btn icon-btn btn-small">
+                  <img src="images/play.svg" alt="" />
+                  <span>Play</span>
+                </a>
+              </td>
+              
+              <td>
+                <a href="examples/speed-0.83/beethoven/MoonlightSonata_ola.wav" class="play-btn icon-btn btn-small">
+                  <img src="images/play.svg" alt="" />
+                  <span>Play</span>
+                </a>
+              </td>
+              
+              <td>
+                <a href="examples/speed-0.83/beethoven/MoonlightSonata_wsola.wav" class="play-btn icon-btn btn-small">
+                  <img src="images/play.svg" alt="" />
+                  <span>Play</span>
+                </a>
+              </td>
+              
+              <td>
+                <a href="examples/speed-0.83/beethoven/MoonlightSonata_phasevocoder.wav" class="play-btn icon-btn btn-small">
+                  <img src="images/play.svg" alt="" />
+                  <span>Play</span>
+                </a>
+              </td>
+              
+              <td>
+                <a href="examples/speed-0.83/beethoven/MoonlightSonata_phasevocoder_identity.wav" class="play-btn icon-btn btn-small">
+                  <img src="images/play.svg" alt="" />
+                  <span>Play</span>
+                </a>
+              </td>
+              
+            </tr>
+            
+            <tr>
+              <td>brad-sucks/DroppingOutOfSchool</td>
+              <td>
+                <a href="examples/orig/brad-sucks/DroppingOutOfSchool.wav" class="play-btn icon-btn btn-small">
+                  <img src="images/play.svg" alt="" />
+                  <span>Play</span>
+                </a>
+              </td>
+              
+              <td>
+                <a href="examples/speed-0.83/brad-sucks/DroppingOutOfSchool_ola.wav" class="play-btn icon-btn btn-small">
+                  <img src="images/play.svg" alt="" />
+                  <span>Play</span>
+                </a>
+              </td>
+              
+              <td>
+                <a href="examples/speed-0.83/brad-sucks/DroppingOutOfSchool_wsola.wav" class="play-btn icon-btn btn-small">
+                  <img src="images/play.svg" alt="" />
+                  <span>Play</span>
+                </a>
+              </td>
+              
+              <td>
+                <a href="examples/speed-0.83/brad-sucks/DroppingOutOfSchool_phasevocoder.wav" class="play-btn icon-btn btn-small">
+                  <img src="images/play.svg" alt="" />
+                  <span>Play</span>
+                </a>
+              </td>
+              
+              <td>
+                <a href="examples/speed-0.83/brad-sucks/DroppingOutOfSchool_phasevocoder_identity.wav" class="play-btn icon-btn btn-small">
+                  <img src="images/play.svg" alt="" />
+                  <span>Play</span>
+                </a>
+              </td>
+              
+            </tr>
+            
+            <tr>
+              <td>brad-sucks/TheresSomethingWrong</td>
+              <td>
+                <a href="examples/orig/brad-sucks/TheresSomethingWrong.wav" class="play-btn icon-btn btn-small">
+                  <img src="images/play.svg" alt="" />
+                  <span>Play</span>
+                </a>
+              </td>
+              
+              <td>
+                <a href="examples/speed-0.83/brad-sucks/TheresSomethingWrong_ola.wav" class="play-btn icon-btn btn-small">
+                  <img src="images/play.svg" alt="" />
+                  <span>Play</span>
+                </a>
+              </td>
+              
+              <td>
+                <a href="examples/speed-0.83/brad-sucks/TheresSomethingWrong_wsola.wav" class="play-btn icon-btn btn-small">
+                  <img src="images/play.svg" alt="" />
+                  <span>Play</span>
+                </a>
+              </td>
+              
+              <td>
+                <a href="examples/speed-0.83/brad-sucks/TheresSomethingWrong_phasevocoder.wav" class="play-btn icon-btn btn-small">
+                  <img src="images/play.svg" alt="" />
+                  <span>Play</span>
+                </a>
+              </td>
+              
+              <td>
+                <a href="examples/speed-0.83/brad-sucks/TheresSomethingWrong_phasevocoder_identity.wav" class="play-btn icon-btn btn-small">
+                  <img src="images/play.svg" alt="" />
+                  <span>Play</span>
+                </a>
+              </td>
+              
+            </tr>
+            
+            <tr>
+              <td>tsmtoolbox/Bongo</td>
+              <td>
+                <a href="examples/orig/tsmtoolbox/Bongo.wav" class="play-btn icon-btn btn-small">
+                  <img src="images/play.svg" alt="" />
+                  <span>Play</span>
+                </a>
+              </td>
+              
+              <td>
+                <a href="examples/speed-0.83/tsmtoolbox/Bongo_ola.wav" class="play-btn icon-btn btn-small">
+                  <img src="images/play.svg" alt="" />
+                  <span>Play</span>
+                </a>
+              </td>
+              
+              <td>
+                <a href="examples/speed-0.83/tsmtoolbox/Bongo_wsola.wav" class="play-btn icon-btn btn-small">
+                  <img src="images/play.svg" alt="" />
+                  <span>Play</span>
+                </a>
+              </td>
+              
+              <td>
+                <a href="examples/speed-0.83/tsmtoolbox/Bongo_phasevocoder.wav" class="play-btn icon-btn btn-small">
+                  <img src="images/play.svg" alt="" />
+                  <span>Play</span>
+                </a>
+              </td>
+              
+              <td>
+                <a href="examples/speed-0.83/tsmtoolbox/Bongo_phasevocoder_identity.wav" class="play-btn icon-btn btn-small">
+                  <img src="images/play.svg" alt="" />
+                  <span>Play</span>
+                </a>
+              </td>
+              
+            </tr>
+            
+            <tr>
+              <td>tsmtoolbox/CastanetsViolin</td>
+              <td>
+                <a href="examples/orig/tsmtoolbox/CastanetsViolin.wav" class="play-btn icon-btn btn-small">
+                  <img src="images/play.svg" alt="" />
+                  <span>Play</span>
+                </a>
+              </td>
+              
+              <td>
+                <a href="examples/speed-0.83/tsmtoolbox/CastanetsViolin_ola.wav" class="play-btn icon-btn btn-small">
+                  <img src="images/play.svg" alt="" />
+                  <span>Play</span>
+                </a>
+              </td>
+              
+              <td>
+                <a href="examples/speed-0.83/tsmtoolbox/CastanetsViolin_wsola.wav" class="play-btn icon-btn btn-small">
+                  <img src="images/play.svg" alt="" />
+                  <span>Play</span>
+                </a>
+              </td>
+              
+              <td>
+                <a href="examples/speed-0.83/tsmtoolbox/CastanetsViolin_phasevocoder.wav" class="play-btn icon-btn btn-small">
+                  <img src="images/play.svg" alt="" />
+                  <span>Play</span>
+                </a>
+              </td>
+              
+              <td>
+                <a href="examples/speed-0.83/tsmtoolbox/CastanetsViolin_phasevocoder_identity.wav" class="play-btn icon-btn btn-small">
+                  <img src="images/play.svg" alt="" />
+                  <span>Play</span>
+                </a>
+              </td>
+              
+            </tr>
+            
+            <tr>
+              <td>tsmtoolbox/DrumSolo</td>
+              <td>
+                <a href="examples/orig/tsmtoolbox/DrumSolo.wav" class="play-btn icon-btn btn-small">
+                  <img src="images/play.svg" alt="" />
+                  <span>Play</span>
+                </a>
+              </td>
+              
+              <td>
+                <a href="examples/speed-0.83/tsmtoolbox/DrumSolo_ola.wav" class="play-btn icon-btn btn-small">
+                  <img src="images/play.svg" alt="" />
+                  <span>Play</span>
+                </a>
+              </td>
+              
+              <td>
+                <a href="examples/speed-0.83/tsmtoolbox/DrumSolo_wsola.wav" class="play-btn icon-btn btn-small">
+                  <img src="images/play.svg" alt="" />
+                  <span>Play</span>
+                </a>
+              </td>
+              
+              <td>
+                <a href="examples/speed-0.83/tsmtoolbox/DrumSolo_phasevocoder.wav" class="play-btn icon-btn btn-small">
+                  <img src="images/play.svg" alt="" />
+                  <span>Play</span>
+                </a>
+              </td>
+              
+              <td>
+                <a href="examples/speed-0.83/tsmtoolbox/DrumSolo_phasevocoder_identity.wav" class="play-btn icon-btn btn-small">
+                  <img src="images/play.svg" alt="" />
+                  <span>Play</span>
+                </a>
+              </td>
+              
+            </tr>
+            
+            <tr>
+              <td>tsmtoolbox/Glockenspiel</td>
+              <td>
+                <a href="examples/orig/tsmtoolbox/Glockenspiel.wav" class="play-btn icon-btn btn-small">
+                  <img src="images/play.svg" alt="" />
+                  <span>Play</span>
+                </a>
+              </td>
+              
+              <td>
+                <a href="examples/speed-0.83/tsmtoolbox/Glockenspiel_ola.wav" class="play-btn icon-btn btn-small">
+                  <img src="images/play.svg" alt="" />
+                  <span>Play</span>
+                </a>
+              </td>
+              
+              <td>
+                <a href="examples/speed-0.83/tsmtoolbox/Glockenspiel_wsola.wav" class="play-btn icon-btn btn-small">
+                  <img src="images/play.svg" alt="" />
+                  <span>Play</span>
+                </a>
+              </td>
+              
+              <td>
+                <a href="examples/speed-0.83/tsmtoolbox/Glockenspiel_phasevocoder.wav" class="play-btn icon-btn btn-small">
+                  <img src="images/play.svg" alt="" />
+                  <span>Play</span>
+                </a>
+              </td>
+              
+              <td>
+                <a href="examples/speed-0.83/tsmtoolbox/Glockenspiel_phasevocoder_identity.wav" class="play-btn icon-btn btn-small">
+                  <img src="images/play.svg" alt="" />
+                  <span>Play</span>
+                </a>
+              </td>
+              
+            </tr>
+            
+            <tr>
+              <td>tsmtoolbox/Jazz</td>
+              <td>
+                <a href="examples/orig/tsmtoolbox/Jazz.wav" class="play-btn icon-btn btn-small">
+                  <img src="images/play.svg" alt="" />
+                  <span>Play</span>
+                </a>
+              </td>
+              
+              <td>
+                <a href="examples/speed-0.83/tsmtoolbox/Jazz_ola.wav" class="play-btn icon-btn btn-small">
+                  <img src="images/play.svg" alt="" />
+                  <span>Play</span>
+                </a>
+              </td>
+              
+              <td>
+                <a href="examples/speed-0.83/tsmtoolbox/Jazz_wsola.wav" class="play-btn icon-btn btn-small">
+                  <img src="images/play.svg" alt="" />
+                  <span>Play</span>
+                </a>
+              </td>
+              
+              <td>
+                <a href="examples/speed-0.83/tsmtoolbox/Jazz_phasevocoder.wav" class="play-btn icon-btn btn-small">
+                  <img src="images/play.svg" alt="" />
+                  <span>Play</span>
+                </a>
+              </td>
+              
+              <td>
+                <a href="examples/speed-0.83/tsmtoolbox/Jazz_phasevocoder_identity.wav" class="play-btn icon-btn btn-small">
+                  <img src="images/play.svg" alt="" />
+                  <span>Play</span>
+                </a>
+              </td>
+              
+            </tr>
+            
+            <tr>
+              <td>tsmtoolbox/Pop</td>
+              <td>
+                <a href="examples/orig/tsmtoolbox/Pop.wav" class="play-btn icon-btn btn-small">
+                  <img src="images/play.svg" alt="" />
+                  <span>Play</span>
+                </a>
+              </td>
+              
+              <td>
+                <a href="examples/speed-0.83/tsmtoolbox/Pop_ola.wav" class="play-btn icon-btn btn-small">
+                  <img src="images/play.svg" alt="" />
+                  <span>Play</span>
+                </a>
+              </td>
+              
+              <td>
+                <a href="examples/speed-0.83/tsmtoolbox/Pop_wsola.wav" class="play-btn icon-btn btn-small">
+                  <img src="images/play.svg" alt="" />
+                  <span>Play</span>
+                </a>
+              </td>
+              
+              <td>
+                <a href="examples/speed-0.83/tsmtoolbox/Pop_phasevocoder.wav" class="play-btn icon-btn btn-small">
+                  <img src="images/play.svg" alt="" />
+                  <span>Play</span>
+                </a>
+              </td>
+              
+              <td>
+                <a href="examples/speed-0.83/tsmtoolbox/Pop_phasevocoder_identity.wav" class="play-btn icon-btn btn-small">
+                  <img src="images/play.svg" alt="" />
+                  <span>Play</span>
+                </a>
+              </td>
+              
+            </tr>
+            
+            <tr>
+              <td>tsmtoolbox/SingingVoice</td>
+              <td>
+                <a href="examples/orig/tsmtoolbox/SingingVoice.wav" class="play-btn icon-btn btn-small">
+                  <img src="images/play.svg" alt="" />
+                  <span>Play</span>
+                </a>
+              </td>
+              
+              <td>
+                <a href="examples/speed-0.83/tsmtoolbox/SingingVoice_ola.wav" class="play-btn icon-btn btn-small">
+                  <img src="images/play.svg" alt="" />
+                  <span>Play</span>
+                </a>
+              </td>
+              
+              <td>
+                <a href="examples/speed-0.83/tsmtoolbox/SingingVoice_wsola.wav" class="play-btn icon-btn btn-small">
+                  <img src="images/play.svg" alt="" />
+                  <span>Play</span>
+                </a>
+              </td>
+              
+              <td>
+                <a href="examples/speed-0.83/tsmtoolbox/SingingVoice_phasevocoder.wav" class="play-btn icon-btn btn-small">
+                  <img src="images/play.svg" alt="" />
+                  <span>Play</span>
+                </a>
+              </td>
+              
+              <td>
+                <a href="examples/speed-0.83/tsmtoolbox/SingingVoice_phasevocoder_identity.wav" class="play-btn icon-btn btn-small">
+                  <img src="images/play.svg" alt="" />
+                  <span>Play</span>
+                </a>
+              </td>
+              
+            </tr>
+            
+            <tr>
+              <td>tsmtoolbox/Stepdad</td>
+              <td>
+                <a href="examples/orig/tsmtoolbox/Stepdad.wav" class="play-btn icon-btn btn-small">
+                  <img src="images/play.svg" alt="" />
+                  <span>Play</span>
+                </a>
+              </td>
+              
+              <td>
+                <a href="examples/speed-0.83/tsmtoolbox/Stepdad_ola.wav" class="play-btn icon-btn btn-small">
+                  <img src="images/play.svg" alt="" />
+                  <span>Play</span>
+                </a>
+              </td>
+              
+              <td>
+                <a href="examples/speed-0.83/tsmtoolbox/Stepdad_wsola.wav" class="play-btn icon-btn btn-small">
+                  <img src="images/play.svg" alt="" />
+                  <span>Play</span>
+                </a>
+              </td>
+              
+              <td>
+                <a href="examples/speed-0.83/tsmtoolbox/Stepdad_phasevocoder.wav" class="play-btn icon-btn btn-small">
+                  <img src="images/play.svg" alt="" />
+                  <span>Play</span>
+                </a>
+              </td>
+              
+              <td>
+                <a href="examples/speed-0.83/tsmtoolbox/Stepdad_phasevocoder_identity.wav" class="play-btn icon-btn btn-small">
+                  <img src="images/play.svg" alt="" />
+                  <span>Play</span>
+                </a>
+              </td>
+              
+            </tr>
+            
+            <tr>
+              <td>tsmtoolbox/SynthMono</td>
+              <td>
+                <a href="examples/orig/tsmtoolbox/SynthMono.wav" class="play-btn icon-btn btn-small">
+                  <img src="images/play.svg" alt="" />
+                  <span>Play</span>
+                </a>
+              </td>
+              
+              <td>
+                <a href="examples/speed-0.83/tsmtoolbox/SynthMono_ola.wav" class="play-btn icon-btn btn-small">
+                  <img src="images/play.svg" alt="" />
+                  <span>Play</span>
+                </a>
+              </td>
+              
+              <td>
+                <a href="examples/speed-0.83/tsmtoolbox/SynthMono_wsola.wav" class="play-btn icon-btn btn-small">
+                  <img src="images/play.svg" alt="" />
+                  <span>Play</span>
+                </a>
+              </td>
+              
+              <td>
+                <a href="examples/speed-0.83/tsmtoolbox/SynthMono_phasevocoder.wav" class="play-btn icon-btn btn-small">
+                  <img src="images/play.svg" alt="" />
+                  <span>Play</span>
+                </a>
+              </td>
+              
+              <td>
+                <a href="examples/speed-0.83/tsmtoolbox/SynthMono_phasevocoder_identity.wav" class="play-btn icon-btn btn-small">
+                  <img src="images/play.svg" alt="" />
+                  <span>Play</span>
+                </a>
+              </td>
+              
+            </tr>
+            
+            <tr>
+              <td>tsmtoolbox/SynthPoly</td>
+              <td>
+                <a href="examples/orig/tsmtoolbox/SynthPoly.wav" class="play-btn icon-btn btn-small">
+                  <img src="images/play.svg" alt="" />
+                  <span>Play</span>
+                </a>
+              </td>
+              
+              <td>
+                <a href="examples/speed-0.83/tsmtoolbox/SynthPoly_ola.wav" class="play-btn icon-btn btn-small">
+                  <img src="images/play.svg" alt="" />
+                  <span>Play</span>
+                </a>
+              </td>
+              
+              <td>
+                <a href="examples/speed-0.83/tsmtoolbox/SynthPoly_wsola.wav" class="play-btn icon-btn btn-small">
+                  <img src="images/play.svg" alt="" />
+                  <span>Play</span>
+                </a>
+              </td>
+              
+              <td>
+                <a href="examples/speed-0.83/tsmtoolbox/SynthPoly_phasevocoder.wav" class="play-btn icon-btn btn-small">
+                  <img src="images/play.svg" alt="" />
+                  <span>Play</span>
+                </a>
+              </td>
+              
+              <td>
+                <a href="examples/speed-0.83/tsmtoolbox/SynthPoly_phasevocoder_identity.wav" class="play-btn icon-btn btn-small">
+                  <img src="images/play.svg" alt="" />
+                  <span>Play</span>
+                </a>
+              </td>
+              
+            </tr>
+            
+          </tbody>
+        </table>
+      </div>
+    </section>
+    
+    <section class="content content-width">
+      <h3>Speed = 2.00</h3>
+
+      <div class="examples">
+        <table class="table table-striped table-hover">
+          <thead>
+            <tr>
+              <th>Name</th>
+              <th>Original</th>
+              
+              <th>OLA</th>
+              
+              <th>WSOLA</th>
+              
+              <th>Phase<br/>Vocoder</th>
+              
+              <th>Phase Vocoder<br/>(identity)</th>
+              
+            </tr>
+          </thead>
+          <tbody>
+            
+            <tr>
+              <td>beethoven/MoonlightSonata</td>
+              <td>
+                <a href="examples/orig/beethoven/MoonlightSonata.wav" class="play-btn icon-btn btn-small">
+                  <img src="images/play.svg" alt="" />
+                  <span>Play</span>
+                </a>
+              </td>
+              
+              <td>
+                <a href="examples/speed-2.00/beethoven/MoonlightSonata_ola.wav" class="play-btn icon-btn btn-small">
+                  <img src="images/play.svg" alt="" />
+                  <span>Play</span>
+                </a>
+              </td>
+              
+              <td>
+                <a href="examples/speed-2.00/beethoven/MoonlightSonata_wsola.wav" class="play-btn icon-btn btn-small">
+                  <img src="images/play.svg" alt="" />
+                  <span>Play</span>
+                </a>
+              </td>
+              
+              <td>
+                <a href="examples/speed-2.00/beethoven/MoonlightSonata_phasevocoder.wav" class="play-btn icon-btn btn-small">
+                  <img src="images/play.svg" alt="" />
+                  <span>Play</span>
+                </a>
+              </td>
+              
+              <td>
+                <a href="examples/speed-2.00/beethoven/MoonlightSonata_phasevocoder_identity.wav" class="play-btn icon-btn btn-small">
+                  <img src="images/play.svg" alt="" />
+                  <span>Play</span>
+                </a>
+              </td>
+              
+            </tr>
+            
+            <tr>
+              <td>brad-sucks/DroppingOutOfSchool</td>
+              <td>
+                <a href="examples/orig/brad-sucks/DroppingOutOfSchool.wav" class="play-btn icon-btn btn-small">
+                  <img src="images/play.svg" alt="" />
+                  <span>Play</span>
+                </a>
+              </td>
+              
+              <td>
+                <a href="examples/speed-2.00/brad-sucks/DroppingOutOfSchool_ola.wav" class="play-btn icon-btn btn-small">
+                  <img src="images/play.svg" alt="" />
+                  <span>Play</span>
+                </a>
+              </td>
+              
+              <td>
+                <a href="examples/speed-2.00/brad-sucks/DroppingOutOfSchool_wsola.wav" class="play-btn icon-btn btn-small">
+                  <img src="images/play.svg" alt="" />
+                  <span>Play</span>
+                </a>
+              </td>
+              
+              <td>
+                <a href="examples/speed-2.00/brad-sucks/DroppingOutOfSchool_phasevocoder.wav" class="play-btn icon-btn btn-small">
+                  <img src="images/play.svg" alt="" />
+                  <span>Play</span>
+                </a>
+              </td>
+              
+              <td>
+                <a href="examples/speed-2.00/brad-sucks/DroppingOutOfSchool_phasevocoder_identity.wav" class="play-btn icon-btn btn-small">
+                  <img src="images/play.svg" alt="" />
+                  <span>Play</span>
+                </a>
+              </td>
+              
+            </tr>
+            
+            <tr>
+              <td>brad-sucks/TheresSomethingWrong</td>
+              <td>
+                <a href="examples/orig/brad-sucks/TheresSomethingWrong.wav" class="play-btn icon-btn btn-small">
+                  <img src="images/play.svg" alt="" />
+                  <span>Play</span>
+                </a>
+              </td>
+              
+              <td>
+                <a href="examples/speed-2.00/brad-sucks/TheresSomethingWrong_ola.wav" class="play-btn icon-btn btn-small">
+                  <img src="images/play.svg" alt="" />
+                  <span>Play</span>
+                </a>
+              </td>
+              
+              <td>
+                <a href="examples/speed-2.00/brad-sucks/TheresSomethingWrong_wsola.wav" class="play-btn icon-btn btn-small">
+                  <img src="images/play.svg" alt="" />
+                  <span>Play</span>
+                </a>
+              </td>
+              
+              <td>
+                <a href="examples/speed-2.00/brad-sucks/TheresSomethingWrong_phasevocoder.wav" class="play-btn icon-btn btn-small">
+                  <img src="images/play.svg" alt="" />
+                  <span>Play</span>
+                </a>
+              </td>
+              
+              <td>
+                <a href="examples/speed-2.00/brad-sucks/TheresSomethingWrong_phasevocoder_identity.wav" class="play-btn icon-btn btn-small">
+                  <img src="images/play.svg" alt="" />
+                  <span>Play</span>
+                </a>
+              </td>
+              
+            </tr>
+            
+            <tr>
+              <td>tsmtoolbox/Bongo</td>
+              <td>
+                <a href="examples/orig/tsmtoolbox/Bongo.wav" class="play-btn icon-btn btn-small">
+                  <img src="images/play.svg" alt="" />
+                  <span>Play</span>
+                </a>
+              </td>
+              
+              <td>
+                <a href="examples/speed-2.00/tsmtoolbox/Bongo_ola.wav" class="play-btn icon-btn btn-small">
+                  <img src="images/play.svg" alt="" />
+                  <span>Play</span>
+                </a>
+              </td>
+              
+              <td>
+                <a href="examples/speed-2.00/tsmtoolbox/Bongo_wsola.wav" class="play-btn icon-btn btn-small">
+                  <img src="images/play.svg" alt="" />
+                  <span>Play</span>
+                </a>
+              </td>
+              
+              <td>
+                <a href="examples/speed-2.00/tsmtoolbox/Bongo_phasevocoder.wav" class="play-btn icon-btn btn-small">
+                  <img src="images/play.svg" alt="" />
+                  <span>Play</span>
+                </a>
+              </td>
+              
+              <td>
+                <a href="examples/speed-2.00/tsmtoolbox/Bongo_phasevocoder_identity.wav" class="play-btn icon-btn btn-small">
+                  <img src="images/play.svg" alt="" />
+                  <span>Play</span>
+                </a>
+              </td>
+              
+            </tr>
+            
+            <tr>
+              <td>tsmtoolbox/CastanetsViolin</td>
+              <td>
+                <a href="examples/orig/tsmtoolbox/CastanetsViolin.wav" class="play-btn icon-btn btn-small">
+                  <img src="images/play.svg" alt="" />
+                  <span>Play</span>
+                </a>
+              </td>
+              
+              <td>
+                <a href="examples/speed-2.00/tsmtoolbox/CastanetsViolin_ola.wav" class="play-btn icon-btn btn-small">
+                  <img src="images/play.svg" alt="" />
+                  <span>Play</span>
+                </a>
+              </td>
+              
+              <td>
+                <a href="examples/speed-2.00/tsmtoolbox/CastanetsViolin_wsola.wav" class="play-btn icon-btn btn-small">
+                  <img src="images/play.svg" alt="" />
+                  <span>Play</span>
+                </a>
+              </td>
+              
+              <td>
+                <a href="examples/speed-2.00/tsmtoolbox/CastanetsViolin_phasevocoder.wav" class="play-btn icon-btn btn-small">
+                  <img src="images/play.svg" alt="" />
+                  <span>Play</span>
+                </a>
+              </td>
+              
+              <td>
+                <a href="examples/speed-2.00/tsmtoolbox/CastanetsViolin_phasevocoder_identity.wav" class="play-btn icon-btn btn-small">
+                  <img src="images/play.svg" alt="" />
+                  <span>Play</span>
+                </a>
+              </td>
+              
+            </tr>
+            
+            <tr>
+              <td>tsmtoolbox/DrumSolo</td>
+              <td>
+                <a href="examples/orig/tsmtoolbox/DrumSolo.wav" class="play-btn icon-btn btn-small">
+                  <img src="images/play.svg" alt="" />
+                  <span>Play</span>
+                </a>
+              </td>
+              
+              <td>
+                <a href="examples/speed-2.00/tsmtoolbox/DrumSolo_ola.wav" class="play-btn icon-btn btn-small">
+                  <img src="images/play.svg" alt="" />
+                  <span>Play</span>
+                </a>
+              </td>
+              
+              <td>
+                <a href="examples/speed-2.00/tsmtoolbox/DrumSolo_wsola.wav" class="play-btn icon-btn btn-small">
+                  <img src="images/play.svg" alt="" />
+                  <span>Play</span>
+                </a>
+              </td>
+              
+              <td>
+                <a href="examples/speed-2.00/tsmtoolbox/DrumSolo_phasevocoder.wav" class="play-btn icon-btn btn-small">
+                  <img src="images/play.svg" alt="" />
+                  <span>Play</span>
+                </a>
+              </td>
+              
+              <td>
+                <a href="examples/speed-2.00/tsmtoolbox/DrumSolo_phasevocoder_identity.wav" class="play-btn icon-btn btn-small">
+                  <img src="images/play.svg" alt="" />
+                  <span>Play</span>
+                </a>
+              </td>
+              
+            </tr>
+            
+            <tr>
+              <td>tsmtoolbox/Glockenspiel</td>
+              <td>
+                <a href="examples/orig/tsmtoolbox/Glockenspiel.wav" class="play-btn icon-btn btn-small">
+                  <img src="images/play.svg" alt="" />
+                  <span>Play</span>
+                </a>
+              </td>
+              
+              <td>
+                <a href="examples/speed-2.00/tsmtoolbox/Glockenspiel_ola.wav" class="play-btn icon-btn btn-small">
+                  <img src="images/play.svg" alt="" />
+                  <span>Play</span>
+                </a>
+              </td>
+              
+              <td>
+                <a href="examples/speed-2.00/tsmtoolbox/Glockenspiel_wsola.wav" class="play-btn icon-btn btn-small">
+                  <img src="images/play.svg" alt="" />
+                  <span>Play</span>
+                </a>
+              </td>
+              
+              <td>
+                <a href="examples/speed-2.00/tsmtoolbox/Glockenspiel_phasevocoder.wav" class="play-btn icon-btn btn-small">
+                  <img src="images/play.svg" alt="" />
+                  <span>Play</span>
+                </a>
+              </td>
+              
+              <td>
+                <a href="examples/speed-2.00/tsmtoolbox/Glockenspiel_phasevocoder_identity.wav" class="play-btn icon-btn btn-small">
+                  <img src="images/play.svg" alt="" />
+                  <span>Play</span>
+                </a>
+              </td>
+              
+            </tr>
+            
+            <tr>
+              <td>tsmtoolbox/Jazz</td>
+              <td>
+                <a href="examples/orig/tsmtoolbox/Jazz.wav" class="play-btn icon-btn btn-small">
+                  <img src="images/play.svg" alt="" />
+                  <span>Play</span>
+                </a>
+              </td>
+              
+              <td>
+                <a href="examples/speed-2.00/tsmtoolbox/Jazz_ola.wav" class="play-btn icon-btn btn-small">
+                  <img src="images/play.svg" alt="" />
+                  <span>Play</span>
+                </a>
+              </td>
+              
+              <td>
+                <a href="examples/speed-2.00/tsmtoolbox/Jazz_wsola.wav" class="play-btn icon-btn btn-small">
+                  <img src="images/play.svg" alt="" />
+                  <span>Play</span>
+                </a>
+              </td>
+              
+              <td>
+                <a href="examples/speed-2.00/tsmtoolbox/Jazz_phasevocoder.wav" class="play-btn icon-btn btn-small">
+                  <img src="images/play.svg" alt="" />
+                  <span>Play</span>
+                </a>
+              </td>
+              
+              <td>
+                <a href="examples/speed-2.00/tsmtoolbox/Jazz_phasevocoder_identity.wav" class="play-btn icon-btn btn-small">
+                  <img src="images/play.svg" alt="" />
+                  <span>Play</span>
+                </a>
+              </td>
+              
+            </tr>
+            
+            <tr>
+              <td>tsmtoolbox/Pop</td>
+              <td>
+                <a href="examples/orig/tsmtoolbox/Pop.wav" class="play-btn icon-btn btn-small">
+                  <img src="images/play.svg" alt="" />
+                  <span>Play</span>
+                </a>
+              </td>
+              
+              <td>
+                <a href="examples/speed-2.00/tsmtoolbox/Pop_ola.wav" class="play-btn icon-btn btn-small">
+                  <img src="images/play.svg" alt="" />
+                  <span>Play</span>
+                </a>
+              </td>
+              
+              <td>
+                <a href="examples/speed-2.00/tsmtoolbox/Pop_wsola.wav" class="play-btn icon-btn btn-small">
+                  <img src="images/play.svg" alt="" />
+                  <span>Play</span>
+                </a>
+              </td>
+              
+              <td>
+                <a href="examples/speed-2.00/tsmtoolbox/Pop_phasevocoder.wav" class="play-btn icon-btn btn-small">
+                  <img src="images/play.svg" alt="" />
+                  <span>Play</span>
+                </a>
+              </td>
+              
+              <td>
+                <a href="examples/speed-2.00/tsmtoolbox/Pop_phasevocoder_identity.wav" class="play-btn icon-btn btn-small">
+                  <img src="images/play.svg" alt="" />
+                  <span>Play</span>
+                </a>
+              </td>
+              
+            </tr>
+            
+            <tr>
+              <td>tsmtoolbox/SingingVoice</td>
+              <td>
+                <a href="examples/orig/tsmtoolbox/SingingVoice.wav" class="play-btn icon-btn btn-small">
+                  <img src="images/play.svg" alt="" />
+                  <span>Play</span>
+                </a>
+              </td>
+              
+              <td>
+                <a href="examples/speed-2.00/tsmtoolbox/SingingVoice_ola.wav" class="play-btn icon-btn btn-small">
+                  <img src="images/play.svg" alt="" />
+                  <span>Play</span>
+                </a>
+              </td>
+              
+              <td>
+                <a href="examples/speed-2.00/tsmtoolbox/SingingVoice_wsola.wav" class="play-btn icon-btn btn-small">
+                  <img src="images/play.svg" alt="" />
+                  <span>Play</span>
+                </a>
+              </td>
+              
+              <td>
+                <a href="examples/speed-2.00/tsmtoolbox/SingingVoice_phasevocoder.wav" class="play-btn icon-btn btn-small">
+                  <img src="images/play.svg" alt="" />
+                  <span>Play</span>
+                </a>
+              </td>
+              
+              <td>
+                <a href="examples/speed-2.00/tsmtoolbox/SingingVoice_phasevocoder_identity.wav" class="play-btn icon-btn btn-small">
+                  <img src="images/play.svg" alt="" />
+                  <span>Play</span>
+                </a>
+              </td>
+              
+            </tr>
+            
+            <tr>
+              <td>tsmtoolbox/Stepdad</td>
+              <td>
+                <a href="examples/orig/tsmtoolbox/Stepdad.wav" class="play-btn icon-btn btn-small">
+                  <img src="images/play.svg" alt="" />
+                  <span>Play</span>
+                </a>
+              </td>
+              
+              <td>
+                <a href="examples/speed-2.00/tsmtoolbox/Stepdad_ola.wav" class="play-btn icon-btn btn-small">
+                  <img src="images/play.svg" alt="" />
+                  <span>Play</span>
+                </a>
+              </td>
+              
+              <td>
+                <a href="examples/speed-2.00/tsmtoolbox/Stepdad_wsola.wav" class="play-btn icon-btn btn-small">
+                  <img src="images/play.svg" alt="" />
+                  <span>Play</span>
+                </a>
+              </td>
+              
+              <td>
+                <a href="examples/speed-2.00/tsmtoolbox/Stepdad_phasevocoder.wav" class="play-btn icon-btn btn-small">
+                  <img src="images/play.svg" alt="" />
+                  <span>Play</span>
+                </a>
+              </td>
+              
+              <td>
+                <a href="examples/speed-2.00/tsmtoolbox/Stepdad_phasevocoder_identity.wav" class="play-btn icon-btn btn-small">
+                  <img src="images/play.svg" alt="" />
+                  <span>Play</span>
+                </a>
+              </td>
+              
+            </tr>
+            
+            <tr>
+              <td>tsmtoolbox/SynthMono</td>
+              <td>
+                <a href="examples/orig/tsmtoolbox/SynthMono.wav" class="play-btn icon-btn btn-small">
+                  <img src="images/play.svg" alt="" />
+                  <span>Play</span>
+                </a>
+              </td>
+              
+              <td>
+                <a href="examples/speed-2.00/tsmtoolbox/SynthMono_ola.wav" class="play-btn icon-btn btn-small">
+                  <img src="images/play.svg" alt="" />
+                  <span>Play</span>
+                </a>
+              </td>
+              
+              <td>
+                <a href="examples/speed-2.00/tsmtoolbox/SynthMono_wsola.wav" class="play-btn icon-btn btn-small">
+                  <img src="images/play.svg" alt="" />
+                  <span>Play</span>
+                </a>
+              </td>
+              
+              <td>
+                <a href="examples/speed-2.00/tsmtoolbox/SynthMono_phasevocoder.wav" class="play-btn icon-btn btn-small">
+                  <img src="images/play.svg" alt="" />
+                  <span>Play</span>
+                </a>
+              </td>
+              
+              <td>
+                <a href="examples/speed-2.00/tsmtoolbox/SynthMono_phasevocoder_identity.wav" class="play-btn icon-btn btn-small">
+                  <img src="images/play.svg" alt="" />
+                  <span>Play</span>
+                </a>
+              </td>
+              
+            </tr>
+            
+            <tr>
+              <td>tsmtoolbox/SynthPoly</td>
+              <td>
+                <a href="examples/orig/tsmtoolbox/SynthPoly.wav" class="play-btn icon-btn btn-small">
+                  <img src="images/play.svg" alt="" />
+                  <span>Play</span>
+                </a>
+              </td>
+              
+              <td>
+                <a href="examples/speed-2.00/tsmtoolbox/SynthPoly_ola.wav" class="play-btn icon-btn btn-small">
+                  <img src="images/play.svg" alt="" />
+                  <span>Play</span>
+                </a>
+              </td>
+              
+              <td>
+                <a href="examples/speed-2.00/tsmtoolbox/SynthPoly_wsola.wav" class="play-btn icon-btn btn-small">
+                  <img src="images/play.svg" alt="" />
+                  <span>Play</span>
+                </a>
+              </td>
+              
+              <td>
+                <a href="examples/speed-2.00/tsmtoolbox/SynthPoly_phasevocoder.wav" class="play-btn icon-btn btn-small">
+                  <img src="images/play.svg" alt="" />
+                  <span>Play</span>
+                </a>
+              </td>
+              
+              <td>
+                <a href="examples/speed-2.00/tsmtoolbox/SynthPoly_phasevocoder_identity.wav" class="play-btn icon-btn btn-small">
+                  <img src="images/play.svg" alt="" />
+                  <span>Play</span>
+                </a>
+              </td>
+              
+            </tr>
+            
+          </tbody>
+        </table>
+      </div>
+    </section>
+    
+
+    <div class="player">
+      <audio controls id="player">
+        <source id="playerSource">
+      </audio>
+    </div>
+
+    <section class="content content-width">
+      <h3 id="credits">Credits</h3>
+
+      <dl class="docutils">
+<dt>beethoven</dt>
+<dd>The beethoven directory contains an extract from a recording of Beethoven's
+Piano Sonata No. 14, released by <a class="reference external" href="http://www.piano-midi.de/">Bernd Krueger</a> under the cc-by-sa
+License.</dd>
+<dt>brad-sucks</dt>
+<dd>The brad-sucks directory contains extracts from songs of the album <a class="reference external" href="http://www.bradsucks.net/albums/out_of_it/">Out of
+It</a>, released by Brad Sucks under cc-by-sa license.</dd>
+<dt>tsmtoolbox</dt>
+<dd>The tsmtoolbox directory contains audio files taken from the <a class="reference external" href="https://www.audiolabs-erlangen.de/resources/MIR/TSMtoolbox/">TSMToolbox
+examples</a>, a MATLAB TSM library. The audio files should be short enough to
+fall under fair use.</dd>
+</dl>
+
+    </section>
+
+    <script src="js/examples.js"></script>
+
+    <footer>
+      <div class="content-width">
+        Designed with <a href="https://picturepan2.github.io/spectre/index.html">Spectre.css</a> and <a href="https://feathericons.com/">Feather</a>.
+      </div>
+    </footer>
+  </body>
+</html>
